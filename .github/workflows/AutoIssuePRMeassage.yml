@@ -7,16 +7,20 @@ on: [pull_request, issues]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    name: PR and Issue Meassage
-    # The type of runner that the job will run on
+  greeting:
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: "Hey, thank you for opening this Issue ! 🙂"
-          pr-message: "Thank You For opening Pull_Request. <br>In order to merge it in main branch one approved Review must be required"
+    - uses: bartick/custom-interactions@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          Thank you for opening this issue in our repository, one of our maintainers will get in touch with you soon.
+        pr-message: |
+          Thank you for opening your pull request in our repository, <br>In order to merge it in main branch one approved Review must be required.
+        pr-once: false
+        issue-once: false
+        pr-number: 10
+        issue-number: 10
