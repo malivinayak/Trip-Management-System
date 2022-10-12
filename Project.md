@@ -11,8 +11,7 @@
 - [ ] 8. Fragmentation
    - [ ] I. Horizontal Fragmentation
    - [ ] II. Vertical fragmentation
-- [ ] 9. 
-
+   
 
 ## Ideas to implement
 - [ ] 1. Taking care of ACID Properties
