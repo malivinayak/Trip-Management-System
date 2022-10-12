@@ -17,7 +17,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: |
-          Thank you for opening this issue in our repository, one of our maintainers will get in touch with you soon.
+          Thank you for opening this issue in our repository, I have just notified all maintainers so one of our maintainers will get in touch with you soon.
         pr-message: |
           Thank you for opening your pull request in our repository, <br>In order to merge it in main branch one approved Review must be required.
         pr-once: false
