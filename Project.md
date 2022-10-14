@@ -36,6 +36,7 @@ To make the [SEM-5](https://github.com/OutdatedGuy/Sem-5-PBL-Code) project suita
     * Create a wallet for user which can store his current balance. If user has a sufficient balance in his wallet then only he/she will able to book the ride.
     * Maintain ACID properties here
     * Maintain Wallet Balance Database separately 
+- [ ] 2.Centralize bank wallet
 
 ## Work To be done
 - [ ] 1. ER Diagram
