@@ -1,4 +1,4 @@
-import express from "express";
+const express = require('express');
 
 // ROUTES FUNCTIONS
 
@@ -12,4 +12,8 @@ app.listen(port, () => {
 });
 
 // API ROUTES
+app.get('/', function (req, res) {
+    console.log("Vinayak");
+    res.send("Done")
+});
 
