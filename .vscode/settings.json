@@ -1,0 +1,12 @@
+{
+  "cSpell.words": [
+    "aadhar",
+    "dbconfig",
+    "lsnrctl",
+    "malivinayak",
+    "oracledb",
+    "pincode"
+  ],
+  "sql-formatter.dialect": "db2",
+  "sql-formatter.linesBetweenQueries": 2
+}

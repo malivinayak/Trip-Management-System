@@ -1,2 +1,4 @@
 node_modules/
 *.env
+DB/Structure_trip_management.sql
+temp
