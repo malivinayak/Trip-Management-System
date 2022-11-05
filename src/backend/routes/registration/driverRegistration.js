@@ -63,4 +63,4 @@ const driverRegistration = async (req, res) => {
     }
 }
 
-export { driverRegistration }
+export { driverRegistration };
