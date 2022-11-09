@@ -34,23 +34,44 @@ const driverRegistration = async (req, res) => {
             });
         }
 
-        // Unique email
-        const checkEmail = await connection.execute(
-            // The statement to execute
-            `SELECT userName
+        let connection, query, bind, options, result;
+        try {
+            // DB Connection
+            connection = await oracledb.getConnection(dbConfig);
+
+            // Unique email
+            const checkEmail = await connection.execute(
+                // The statement to execute
+                `SELECT userName
             FROM driver
             where email = :email`,
-            [email],
-            {
-                maxRows: 1
-            });
-        console.log(checkEmail.rows);
-        if (checkEmail.rows == null) {
-            return res.status(403).send({
-                message: "Email is already registered!!!\nYou can either Login or Register with different username",
+                [email],
+                {
+                    maxRows: 1
+                });
+            console.log(checkEmail.rows);
+            if (checkEmail.rows == null) {
+                return res.status(403).send({
+                    message: "Email is already registered!!!\nYou can either Login or Register with different username",
+                    status: "failure",
+                    code: 403,
+                });
+            }
+        } catch (err) {
+            console.log(" Error at Data Base : " + err);
+            return res.status(500).send({
+                message: "Driver Registration Failed!!!",
                 status: "failure",
-                code: 403,
+                code: 500,
             });
+        } finally {
+            if (connection) {
+                try {
+                    await connection.close();
+                } catch (err) {
+                    console.error("Connection Close Error :" + err);
+                }
+            }
         }
 
     } catch (err) {
