@@ -57,37 +57,37 @@ CREATE OR REPLACE TYPE BODY Person_Type AS
 END;
 
 CREATE type Admin_Type under Person_Type (
-        adminID int primary key not final
+        adminID varchar(20) primary key not final
 );
 
 create table Admin of Admin_Type;
 
 -- create a sequence ***************************
 CREATE type User_Type under Person_Type (
-        userID int primary key,
-        address address not null,
+        userID varchar(20) primary key,
+        uaddress address not null,
         aadhar_number number(20) not null,
         wallet_balance number DEFAULT 0
 ) not final;
 
-create table User of User_Type;
+create table client of User_Type;
 
 CREATE type Driver_Type under Person_Type (
-        driverID int primary key not null,
-        address address,
-        aadhar_number number(20) not null,
-        lincence_number varchar(20) not null,
-        exp_date DATE not null,
-        avg_rating number(1, 1) not null,
-        total_earing number DEFAULT 0,
-        wallet_balance number DEFAULT 0
+        driverID varchar(20) primary key,
+        daddress address,
+        aadhar_number number(20),
+        lincence_number varchar(20),
+        exp_date DATE,
+        avg_rating number(1, 1),
+        total_earing number,
+        wallet_balance number
 ) not final;
 
 create table Driver of Driver_Type;
 
 CREATE TABLE UserWallet (
-        transactionID int primary key not null,
-        personID int not null,
+        transactionID varchar(20) primary key not null,
+        personID varchar(20) not null,
         transaction_type ENUM('CU','CD','UC','DC') not null,
         amount int not null
 );
@@ -107,11 +107,11 @@ CREATE TABLE Trip (
 CREATE TABLE Vehical (
         vehicalID varchar(10) primary key not null,
         driverID varchar(10) not null foreign key,
-        CONSTRAINT FK_V_DID FOREIGN KEY (driverID) REFERENCES Driver(driverID),
+        CONSTRAINT FK_V_DID FOREIGN KEY (driverID) REFERENCES Employee(driverID),
         vehical_type varchar(30) not null,
         lincece_plate varchar(20) not null,
         registration_number varchar(50) not null,
-        ac_nonAc BOOLEAN
+        isac varchar(5) not null
 );
 
 CREATE TABLE Rating (
