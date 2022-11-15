@@ -1,5 +1,16 @@
 import oracledb from 'oracledb';
 import { dbConfig } from '../../dbconfig.js';
+import fs from 'fs';
+
+let libPath;
+if (process.platform === 'win32') {           // Windows
+    libPath = 'C:\\oracle\\instantclient_19_12';
+} else if (process.platform === 'darwin') {   // macOS
+    libPath = process.env.HOME + '/Downloads/instantclient_19_8';
+}
+if (libPath && fs.existsSync(libPath)) {
+    oracledb.initOracleClient({ libDir: libPath });
+}
 
 const driverRegistration = async (req, res) => {
     try {
@@ -38,22 +49,18 @@ const driverRegistration = async (req, res) => {
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
+            options = {
+                outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+                // extendedMetaData: true,               // get extra metadata
+                // prefetchRows:     100,                // internal buffer allocation size for tuning
+                // fetchArraySize:   100                 // internal buffer allocation size for tuning
+            };
 
             // Unique Username
-            const checkUserName = await connection.execute(
-                // The statement to execute
-                `SELECT userName
-                FROM driver
-                where username = :username`,
-                [userName],
-                {
-                    maxRows: 1
-                });
-            console.log(checkUserName.metaData);
-            // Data Print Format [ { name: 'FARMER' }, { name: 'PICKED' }, { name: 'RIPENESS' } ]
-            console.log(checkUserName.rows);
-            // Data Print Format [ [ 'Mindy', 2019-07-16T03:30:00.000Z, 'More Yellow than Green' ] ]
-            if (checkUserName.rows == null) {
+            query = 'select USERNAME from EMPLOYEE where USERNAME = :1';
+
+            const checkUserName = await connection.execute(query,[userName],options);
+            if (checkUserName.rows[0] !== undefined) {
                 return res.status(403).send({
                     message: "Username Already Taken!!!\nUse a different one.",
                     status: "failure",
@@ -62,17 +69,10 @@ const driverRegistration = async (req, res) => {
             }
 
             // Unique email
-            const checkEmail = await connection.execute(
-                // The statement to execute
-                `SELECT userName
-                FROM driver
-                where email = :email`,
-                [email],
-                {
-                    maxRows: 1
-                });
-            console.log(checkEmail.rows);
-            if (checkEmail.rows == null) {
+            query = `select EMAIL from EMPLOYEE where EMAIL = :1`;
+            const checkEmail = await connection.execute(query, [email], options);
+
+            if (checkEmail.rows[0] !== undefined) {
                 return res.status(403).send({
                     message: "Email is already registered!!!\nYou can either Login or Register with different username",
                     status: "failure",
@@ -81,23 +81,29 @@ const driverRegistration = async (req, res) => {
             }
 
             // Unique Phone Number
-            const checkPhoneNumber = await connection.execute(
-                // The statement to execute
-                `SELECT userName
-                FROM driver
-                where phone = :phone`,
-                [phone],
-                {
-                    maxRows: 1
-                });
-            console.log(checkPhoneNumber.rows);
-            if (checkPhoneNumber.rows == null) {
+            query = `select PHONE from EMPLOYEE where PHONE = :1`;
+            const checkPhoneNumber = await connection.execute(query, [phone], options);
+
+            if (checkPhoneNumber.rows[0] !== undefined) {
                 return res.status(403).send({
                     message: "Phone Number is already registered!!!\nYou can either Login or Register with different username",
                     status: "failure",
                     code: 403,
                 });
             }
+            // Unique Lincence_Number
+            query = `select Lincence_Number from EMPLOYEE where Lincence_Number = :1`;
+            const checkLincenceNumber = await connection.execute(query, [licenseNumber], options);
+
+            if (checkLincenceNumber.rows[0] !== undefined) {
+                return res.status(403).send({
+                    message: "",
+                    status: "failure",
+                    code: 403,
+                });
+            }
+
+            const WALLET_BALANCE = 0;
 
             query = `insert into driver values(:1,:2)`;
             bind = [fname, mname, lname];
