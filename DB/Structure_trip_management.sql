@@ -149,3 +149,11 @@ CREATE TABLE DriveTrip (
 -- 2. create function or procedures
 -- 3. Update .drawio file
 -- 4. Inheritance
+
+-- Insertion Demo queries
+INSERT INTO 
+    client(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, USERID, UADDRESS, AADHAR_NUMBER, WALLET_BALANCE) 
+    VALUES(new Name('myfname','mymname','mylame'),
+        'myname','Pass@123','mailID@gmail.com',8945129434,'31-DEC-2000','Male','U0000',
+        new address('12B','new street','old area','back city','this state',416000),895615487556,0
+    );
