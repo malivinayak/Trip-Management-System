@@ -44,7 +44,7 @@ const userRegistration = async (req, res) => {
             });
         }
 
-        let connection, query, bind, options, result, binds;
+        let connection, query, options, result;
 
         try {
             // DB Connection
