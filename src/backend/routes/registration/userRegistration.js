@@ -47,7 +47,6 @@ const userRegistration = async (req, res) => {
                 code: 400,
             });
         }
-        console.log(req.body);
 
         let connection, query, options, result;
 
