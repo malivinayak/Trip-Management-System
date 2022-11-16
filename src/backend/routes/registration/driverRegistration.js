@@ -51,9 +51,6 @@ const driverRegistration = async (req, res) => {
             connection = await oracledb.getConnection(dbConfig);
             options = {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
-                // extendedMetaData: true,               // get extra metadata
-                // prefetchRows:     100,                // internal buffer allocation size for tuning
-                // fetchArraySize:   100                 // internal buffer allocation size for tuning
             };
 
             // Unique Username
