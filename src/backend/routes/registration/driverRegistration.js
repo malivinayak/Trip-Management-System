@@ -80,6 +80,18 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
+            // Unique aadhar
+            query = `select Aadhar_Number from EMPLOYEE where Aadhar_Number = :1`;
+            const checkaadharNumber = await connection.execute(query, [aadharNumber], options);
+
+            if (checkaadharNumber.rows[0] !== undefined) {
+                return res.status(403).send({
+                    message: "Aadhar_Number is already registered!!!\nYou can either Register with different Aadhar_Number",
+                    status: "failure",
+                    code: 403,
+                });
+            }
+
             // Unique Phone Number
             query = `select PHONE from EMPLOYEE where PHONE = :1`;
             const checkPhoneNumber = await connection.execute(query, [phone], options);
@@ -105,17 +117,10 @@ const driverRegistration = async (req, res) => {
 
             const WALLET_BALANCE = 0;
 
-            query = `insert into driver values(:1,:2)`;
-            bind = [fname, mname, lname];
-            options = {
-                bindDefs: [
-                    { type: oracledb.STRING },
-                    { type: oracledb.STRING, maxSize: 50 }
-                ]
-            };
-            result = await connection.executeMany(query, bind, options);
-
-            console.log("Number of rows inserted:", result.rowsAffected);
+            result = await connection.execute(
+                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, USERID, UADDRESS, AADHAR_NUMBER, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9,:10, new address(:11,:12,:13,:14,:15,:16), :17, :18 )`,
+                [fname, mname, lname, userName, password, email, phone, dbo, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber, WALLET_BALANCE],
+                { autoCommit: true });
 
             return res.send({
                 message: "User Registration Successful...",
