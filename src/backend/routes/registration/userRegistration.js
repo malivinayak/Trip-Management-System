@@ -14,8 +14,13 @@ if (libPath && fs.existsSync(libPath)) {
 
 const userRegistration = async (req, res) => {
     try {
-        const { fname, mname, lname, userName, password, email, phone, dbo, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber } =
-            req.body;
+        const { fname, mname, lname, userName, password, email, gender, userID, houseNo, street, area, city, state } = req.body;
+
+        let { birthDate, phone, pincode, aadharNumber } = req.body;
+        phone = parseInt(phone);
+        pincode = parseInt(pincode);
+        aadharNumber = parseInt(aadharNumber);
+        birthDate = new Date(birthDate);
 
         if (
             !fname ||
@@ -25,9 +30,8 @@ const userRegistration = async (req, res) => {
             !password ||
             !email ||
             !phone ||
-            !dbo ||
+            !birthDate ||
             !gender ||
-            !userID ||
             !houseNo ||
             !street ||
             !area ||
@@ -93,11 +97,12 @@ const userRegistration = async (req, res) => {
                 });
             }
 
-            const WALLET_BALANCE = 0;
+            const WALLET_BALANCE = 0,
+                userID = userName;
 
             result = await connection.execute(
                 `INSERT INTO client(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, USERID, UADDRESS, AADHAR_NUMBER, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9,:10, new address(:11,:12,:13,:14,:15,:16), :17, :18 )`,
-                [fname, mname, lname, userName, password, email, phone, dbo, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber, WALLET_BALANCE],
+                [fname, mname, lname, userName, password, email, phone, birthDate, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber, WALLET_BALANCE],
                 { autoCommit: true });
 
             return res.send({
