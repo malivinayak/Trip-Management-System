@@ -56,7 +56,7 @@ const driverRegistration = async (req, res) => {
             // Unique Username
             query = 'select USERNAME from EMPLOYEE where USERNAME = :1';
 
-            const checkUserName = await connection.execute(query,[userName],options);
+            const checkUserName = await connection.execute(query, [userName], options);
             if (checkUserName.rows[0] !== undefined) {
                 return res.status(403).send({
                     message: "Username Already Taken!!!\nUse a different one.",
@@ -78,7 +78,7 @@ const driverRegistration = async (req, res) => {
             }
 
             // Unique aadhar
-            query = `select Aadhar_Number from EMPLOYEE where Aadhar_Number = :1`;
+            query = `select AADHAR_NUMBER from EMPLOYEE where Aadhar_Number = :1`;
             const checkaadharNumber = await connection.execute(query, [aadharNumber], options);
 
             if (checkaadharNumber.rows[0] !== undefined) {
@@ -113,7 +113,7 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
-            const WALLET_BALANCE = 0, avgRating = 0, totalEarning=0;
+            const WALLET_BALANCE = 0, avgRating = 0, totalEarning = 0;
 
             result = await connection.execute(
                 `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, DADDRESS, AADHAR_NUMBER, LINCENCE_NUMBER, EXP_DATE, AVG_RATING, TOTAL_EARING, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9, new address(:10,:11,:12,:13,:14,:15), :16, :17, :18, :19, :20, :21 )`,
