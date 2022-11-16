@@ -103,6 +103,7 @@ const driverRegistration = async (req, res) => {
                     code: 403,
                 });
             }
+            
             // Unique Lincence_Number
             query = `select Lincence_Number from EMPLOYEE where Lincence_Number = :1`;
             const checkLincenceNumber = await connection.execute(query, [licenseNumber], options);
