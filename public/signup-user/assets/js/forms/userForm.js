@@ -15,7 +15,7 @@ const setUserForm = () => {
   const yyyy = today.getFullYear();
   const todayDate = yyyy + "-" + mm + "-" + dd;
   userForm
-    .querySelector("input[name='dbo']")
+    .querySelector("input[name='birthDate']")
     .setAttribute("max", todayDate);
 
   userForm.addEventListener("submit", (e) => {
@@ -26,7 +26,7 @@ const setUserForm = () => {
       mname: userForm.mname.value,
       lname: userForm.lname.value,
       gender: userForm.gender.value,
-      dbo: userForm.dbo.value,
+      birthDate: userForm.birthDate.value,
       email: userForm.email.value,
       phone: userForm.phone.value,
       aadharNumber: userForm.aadharNumber.value,
