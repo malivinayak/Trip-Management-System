@@ -35,21 +35,18 @@ const login = async (req, res) => {
             });
         }
 
+
+        let connection, query, options, result;
         // query
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
+            options = {
+                outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
+            };
 
-            const results = await connection.execute(
-                // The statement to execute
-                `SELECT *
-                FROM :role
-                where userName  = :userName`,
-                [role],
-                [userName],
-                {
-                    maxRows: 1
-                });
+            query = `SELECT * FROM :role where userName = :userName`;
+            const results = await connection.execute(query, [role,userName], options);
 
             if (results.length === 0) {
                 return res.send({
