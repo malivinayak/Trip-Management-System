@@ -49,19 +49,22 @@ const login = async (req, res) => {
             query = `SELECT * FROM :role where userName = :userName`;
             const results = await connection.execute(query, [role,userName], options);
 
-            if (results.length === 0) {
+            if (results.rows[0] === undefined) {
                 return res.send({
                     status: "failure",
                     message: "This Username does NOT Exists!!!",
                     code: 400,
                 });
-            } else if (results[0].token !== null) {
+            } else if (results.rows[0].token !== null) {
+                const restTokenQuery = `------------update query here`;
+                const result = await connection.execute(restTokenQuery, [role,userName], options);
+
                 return res.send({
                     status: "failure",
-                    message: "Already logged in!!!\nTry After logout from other device",
+                    message: "Already logged in device detected!!!\nRefresh the page and login again",
                     code: 400,
                 });
-            } else if (results[0].password !== password) {
+            } else if (results.rows[0].password !== password) {
                 return res.send({
                     status: "failure",
                     message: "Invalid Credentials!!!",
