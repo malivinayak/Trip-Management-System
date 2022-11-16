@@ -35,6 +35,7 @@ const login = async (req, res) => {
             });
         }
 
+        roles = roles=="user" ? "CLIENT" : roles=="driver" ? "EMPLOYEE" : "ADMIN" ;
 
         let connection, query, options, result;
         // query
