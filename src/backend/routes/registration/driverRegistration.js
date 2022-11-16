@@ -103,7 +103,7 @@ const driverRegistration = async (req, res) => {
                     code: 403,
                 });
             }
-            
+
             // Unique Lincence_Number
             query = `select Lincence_Number from EMPLOYEE where Lincence_Number = :1`;
             const checkLincenceNumber = await connection.execute(query, [licenseNumber], options);
@@ -116,15 +116,15 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
-            const WALLET_BALANCE = 0;
+            const WALLET_BALANCE = 0, avgRating = 0, totalEarning=0;
 
             result = await connection.execute(
-                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, USERID, UADDRESS, AADHAR_NUMBER, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9,:10, new address(:11,:12,:13,:14,:15,:16), :17, :18 )`,
-                [fname, mname, lname, userName, password, email, phone, dbo, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber, WALLET_BALANCE],
+                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, DADDRESS, AADHAR_NUMBER, LINCENCE_NUMBER, EXP_DATE, AVG_RATING, TOTAL_EARING, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9, new address(:10,:11,:12,:13,:14,:15), :16, :17, :18, :19, :20, :21 )`,
+                [fname, mname, lname, userName, password, email, phone, dbo, gender, houseNo, street, area, city, state, pincode, aadharNumber, licenseNumber, expDate, avgRating, totalEarning, WALLET_BALANCE],
                 { autoCommit: true });
 
             return res.send({
-                message: "User Registration Successful...",
+                message: "Driver Registration Successful...",
                 status: "success",
                 code: 200,
             });
