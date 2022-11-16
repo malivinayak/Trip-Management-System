@@ -14,8 +14,13 @@ if (libPath && fs.existsSync(libPath)) {
 
 const userRegistration = async (req, res) => {
     try {
-        const { fname, mname, lname, userName, password, email, phone, dbo, gender, userID, houseNo, street, area, city, state, pincode, aadharNumber } =
-            req.body;
+        const { fname, mname, lname, userName, password, email, gender, userID, houseNo, street, area, city, state } = req.body;
+
+        let { dbo, phone, pincode, aadharNumber } = req.body;
+        phone = parseInt(phone);
+        pincode = parseInt(pincode);
+        aadharNumber = parseInt(aadharNumber);
+        dbo = new Date(dbo);
 
         if (
             !fname ||
@@ -27,7 +32,6 @@ const userRegistration = async (req, res) => {
             !phone ||
             !dbo ||
             !gender ||
-            !userID ||
             !houseNo ||
             !street ||
             !area ||
@@ -43,6 +47,7 @@ const userRegistration = async (req, res) => {
                 code: 400,
             });
         }
+        console.log(req.body);
 
         let connection, query, options, result;
 
