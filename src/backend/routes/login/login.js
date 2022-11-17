@@ -60,16 +60,16 @@ const login = async (req, res) => {
                     code: 400,
                 });
             } else if (results.rows[0].TOKEN !== null) {
-                let restTokenQuery;
+                let resetTokenQuery;
                 if (role === "user") {
-                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
+                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
                 } else if (role === "driver") {
-                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
+                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
                 } else {
-                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
+                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
                 }
 
-                await connection.execute(restTokenQuery, [null, userName], { autoCommit: true });
+                await connection.execute(resetTokenQuery, [null, userName], { autoCommit: true });
 
                 return res.send({
                     status: "failure",
