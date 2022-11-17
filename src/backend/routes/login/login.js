@@ -15,7 +15,6 @@ if (libPath && fs.existsSync(libPath)) {
 
 
 const login = async (req, res) => {
-    // console.log(req.body);
     const roles = ["admin", "user", "driver"];
 
     try {
@@ -36,9 +35,7 @@ const login = async (req, res) => {
             });
         }
 
-        console.log(role);
         role = role == "user" ? "CLIENT" : role == "driver" ? "EMPLOYEE" : "ADMIN";
-        console.log(role);
 
         let connection, query, options, result;
         // query
@@ -49,10 +46,6 @@ const login = async (req, res) => {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
             };
 
-            console.log("1");
-            // query = `SELECT * FROM :1 where userName = :2`;
-            // const results = await connection.execute(query, [role, userName], options);
-
             if (role === "CLIENT") {
                 query = `select * from TRIP_MANAGEMENT_SYSTEM.client where USERNAME = :1`
             } else if (role === "EMPLOYEE") {
@@ -62,8 +55,6 @@ const login = async (req, res) => {
             }
 
             const results = await connection.execute(query, [userName], options);
-            console.log(results);
-            console.log("2");
             if (results.rows[0] === undefined) {
                 return res.send({
                     status: "failure",
