@@ -65,6 +65,6 @@ app.post("/api/trip/available", tripAvailable);
 app.post("/api/trip/accepting", tripAccepting);
 app.post("/api/trip/rating", tripRating);
 
-//Wallet
+//Wallet APIs
 app.post("/api/wallet/addMoney", addMoney);
 app.post("/api/wallet/withdrawMoney", withdrawMoney);
