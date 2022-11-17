@@ -74,7 +74,7 @@ const login = async (req, res) => {
             } else {
                 const token = randomBytes(8).toString("hex");
                 const restTokenQuery = `UPDATE :1 SET TOKEN = :2 WHERE USERID = :3;`;
-                const result = await connection.execute(restTokenQuery, [role, token, userName], options);
+                await connection.execute(restTokenQuery, [role, token, userName], options);
 
                 return res.send({
                     status: "success",
