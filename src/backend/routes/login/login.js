@@ -1,6 +1,7 @@
 import oracledb from 'oracledb';
 import { dbConfig } from '../../dbconfig.js';
 import fs from 'fs';
+import { randomBytes } from "crypto";
 
 let libPath;
 if (process.platform === 'win32') {           // Windows
@@ -35,7 +36,7 @@ const login = async (req, res) => {
             });
         }
 
-        roles = roles=="user" ? "CLIENT" : roles=="driver" ? "EMPLOYEE" : "ADMIN" ;
+        roles = roles == "user" ? "CLIENT" : roles == "driver" ? "EMPLOYEE" : "ADMIN";
 
         let connection, query, options, result;
         // query
@@ -46,8 +47,8 @@ const login = async (req, res) => {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
             };
 
-            query = `SELECT * FROM :role where userName = :userName`;
-            const results = await connection.execute(query, [role,userName], options);
+            query = `SELECT * FROM :1 where userName = :2`;
+            const results = await connection.execute(query, [role, userName], options);
 
             if (results.rows[0] === undefined) {
                 return res.send({
@@ -56,8 +57,8 @@ const login = async (req, res) => {
                     code: 400,
                 });
             } else if (results.rows[0].token !== null) {
-                const restTokenQuery = `------------update query here`;
-                const result = await connection.execute(restTokenQuery, [role,userName], options);
+                const restTokenQuery = `UPDATE :1 SET TOKEN = :2 WHERE USERID = :3;`;
+                await connection.execute(restTokenQuery, [role, null, userName], options);
 
                 return res.send({
                     status: "failure",
@@ -70,11 +71,21 @@ const login = async (req, res) => {
                     message: "Invalid Credentials!!!",
                     code: 400,
                 });
+            } else {
+                const token = randomBytes(8).toString("hex");
+                const restTokenQuery = `UPDATE :1 SET TOKEN = :2 WHERE USERID = :3;`;
+                const result = await connection.execute(restTokenQuery, [role, token, userName], options);
+
+                return res.send({
+                    status: "success",
+                    code: 200,
+                    data: {
+                        token: token,
+                    },
+                });
             }
-
-
-
         }
+
         catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
