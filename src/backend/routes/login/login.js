@@ -61,9 +61,8 @@ const login = async (req, res) => {
                 query = `select * from TRIP_MANAGEMENT_SYSTEM.ADMIN where USERNAME = :1`;
             }
 
-
             const results = await connection.execute(query, [userName], options);
-
+            console.log(results);
             console.log("2");
             if (results.rows[0] === undefined) {
                 return res.send({
@@ -71,16 +70,24 @@ const login = async (req, res) => {
                     message: "This Username does NOT Exists!!!",
                     code: 400,
                 });
-            } else if (results.rows[0].token !== null) {
-                const restTokenQuery = `UPDATE :1 SET TOKEN = :2 WHERE USERID = :3;`;
-                await connection.execute(restTokenQuery, [role, null, userName], options);
+            } else if (results.rows[0].TOKEN !== null) {
+                let restTokenQuery;
+                if (role === "CLIENT") {
+                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
+                } else if (role === "EMPLOYEE") {
+                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
+                } else {
+                    restTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
+                }
+
+                await connection.execute(restTokenQuery, [null, userName], { autoCommit: true });
 
                 return res.send({
                     status: "failure",
                     message: "Already logged in device detected!!!\nRefresh the page and login again",
                     code: 400,
                 });
-            } else if (results.rows[0].password !== password) {
+            } else if (results.rows[0].PASSWORD !== password) {
                 return res.send({
                     status: "failure",
                     message: "Invalid Credentials!!!",
@@ -88,8 +95,16 @@ const login = async (req, res) => {
                 });
             } else {
                 const token = randomBytes(8).toString("hex");
-                const restTokenQuery = `UPDATE :1 SET TOKEN = :2 WHERE USERID = :3;`;
-                await connection.execute(restTokenQuery, [role, token, userName], options);
+                let setTokenQuery;
+                if (role === "CLIENT") {
+                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
+                } else if (role === "EMPLOYEE") {
+                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
+                } else {
+                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
+                }
+
+                await connection.execute(setTokenQuery, [token, userName], { autoCommit: true });
 
                 return res.send({
                     status: "success",
