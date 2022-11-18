@@ -78,12 +78,12 @@ const driverRegistration = async (req, res) => {
             }
 
             // Unique aadhar
-            query = `select AADHAR_NUMBER from EMPLOYEE where Aadhar_Number = :1`;
+            query = `select AADHAR_NUMBER from EMPLOYEE where AADHAR_NUMBER = :1`;
             const checkaadharNumber = await connection.execute(query, [aadharNumber], options);
 
             if (checkaadharNumber.rows[0] !== undefined) {
                 return res.status(403).send({
-                    message: "Aadhar_Number is already registered!!!\nYou can either Register with different Aadhar_Number",
+                    message: "Aadhar Number is already registered!!!",
                     status: "failure",
                     code: 403,
                 });
@@ -101,8 +101,8 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
-            // Unique Lincence_Number
-            query = `select Lincence_Number from EMPLOYEE where Lincence_Number = :1`;
+            // Unique Lincence_Number 
+            query = `select LINCENCE_NUMBER from EMPLOYEE where LINCENCE_NUMBER = :1`;
             const checkLincenceNumber = await connection.execute(query, [licenseNumber], options);
 
             if (checkLincenceNumber.rows[0] !== undefined) {
