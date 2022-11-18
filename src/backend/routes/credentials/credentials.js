@@ -1,5 +1,16 @@
 import oracledb from 'oracledb';
 import { dbConfig } from '../../dbconfig.js';
+import fs from 'fs';
+
+let libPath;
+if (process.platform === 'win32') {           // Windows
+    libPath = 'C:\\oracle\\instantclient_19_12';
+} else if (process.platform === 'darwin') {   // macOS
+    libPath = process.env.HOME + '/Downloads/instantclient_19_8';
+}
+if (libPath && fs.existsSync(libPath)) {
+    oracledb.initOracleClient({ libDir: libPath });
+}
 
 
 const credentials = async (req, res) => {
