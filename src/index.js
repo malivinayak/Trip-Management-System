@@ -1,26 +1,33 @@
 import express from 'express';
 
 // ROUTES FUNCTIONS
+
 // Registration
 import { userRegistration } from "./backend/routes/registration/userRegistration.js";
 import { driverRegistration } from "./backend/routes/registration/driverRegistration.js";
+
 // Login
 import { login } from "./backend/routes/login/login.js";
+
 // Credentials
 import { credentials } from "./backend/routes/credentials/credentials.js";
+
 // Session End
 import { sessionEnd } from "./backend/routes/session-end/sessionEnd.js";
+
 // Trip Function
 import { tripBooking } from "./backend/routes/trip/tripBooking.js";
 import { tripHistory } from "./backend/routes/trip/tripHistory.js";
 import { tripAvailable } from "./backend/routes/trip/tripAvailable.js";
 import { tripAccepting } from "./backend/routes/trip/tripAccepting.js";
 import { tripRating } from "./backend/routes/trip/tripRating.js";
+
 // Admin Queries
 import { userQuery } from "./backend/routes/queries/userQuery.js";
 import { driverQuery } from "./backend/routes/queries/driverQuery.js";
 import { tripQuery } from "./backend/routes/queries/tripQuery.js";
 import { customQuery } from "./backend/routes/queries/customQuery.js";
+
 // Wallet
 import { addMoney } from "./backend/routes/wallet/addMoney.js";
 import { withdrawMoney } from "./backend/routes/wallet/withdrawMoney.js";
