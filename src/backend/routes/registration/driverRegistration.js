@@ -51,15 +51,12 @@ const driverRegistration = async (req, res) => {
             connection = await oracledb.getConnection(dbConfig);
             options = {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
-                // extendedMetaData: true,               // get extra metadata
-                // prefetchRows:     100,                // internal buffer allocation size for tuning
-                // fetchArraySize:   100                 // internal buffer allocation size for tuning
             };
 
             // Unique Username
             query = 'select USERNAME from EMPLOYEE where USERNAME = :1';
 
-            const checkUserName = await connection.execute(query,[userName],options);
+            const checkUserName = await connection.execute(query, [userName], options);
             if (checkUserName.rows[0] !== undefined) {
                 return res.status(403).send({
                     message: "Username Already Taken!!!\nUse a different one.",
@@ -80,6 +77,18 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
+            // Unique aadhar
+            query = `select AADHAR_NUMBER from EMPLOYEE where AADHAR_NUMBER = :1`;
+            const checkaadharNumber = await connection.execute(query, [aadharNumber], options);
+
+            if (checkaadharNumber.rows[0] !== undefined) {
+                return res.status(403).send({
+                    message: "Aadhar Number is already registered!!!",
+                    status: "failure",
+                    code: 403,
+                });
+            }
+
             // Unique Phone Number
             query = `select PHONE from EMPLOYEE where PHONE = :1`;
             const checkPhoneNumber = await connection.execute(query, [phone], options);
@@ -91,8 +100,9 @@ const driverRegistration = async (req, res) => {
                     code: 403,
                 });
             }
-            // Unique Lincence_Number
-            query = `select Lincence_Number from EMPLOYEE where Lincence_Number = :1`;
+
+            // Unique Lincence_Number 
+            query = `select LINCENCE_NUMBER from EMPLOYEE where LINCENCE_NUMBER = :1`;
             const checkLincenceNumber = await connection.execute(query, [licenseNumber], options);
 
             if (checkLincenceNumber.rows[0] !== undefined) {
@@ -103,22 +113,15 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
-            const WALLET_BALANCE = 0;
+            const WALLET_BALANCE = 0, avgRating = 0, totalEarning = 0;
 
-            query = `insert into driver values(:1,:2)`;
-            bind = [fname, mname, lname];
-            options = {
-                bindDefs: [
-                    { type: oracledb.STRING },
-                    { type: oracledb.STRING, maxSize: 50 }
-                ]
-            };
-            result = await connection.executeMany(query, bind, options);
-
-            console.log("Number of rows inserted:", result.rowsAffected);
+            result = await connection.execute(
+                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, DADDRESS, AADHAR_NUMBER, LINCENCE_NUMBER, EXP_DATE, AVG_RATING, TOTAL_EARING, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9, new address(:10,:11,:12,:13,:14,:15), :16, :17, :18, :19, :20, :21 )`,
+                [fname, mname, lname, userName, password, email, phone, dbo, gender, houseNo, street, area, city, state, pincode, aadharNumber, licenseNumber, expDate, avgRating, totalEarning, WALLET_BALANCE],
+                { autoCommit: true });
 
             return res.send({
-                message: "User Registration Successful...",
+                message: "Driver Registration Successful...",
                 status: "success",
                 code: 200,
             });
