@@ -23,7 +23,7 @@ import { tripAccepting } from "./backend/routes/trip/tripAccepting.js";
 import { tripRating } from "./backend/routes/trip/tripRating.js";
 
 // Admin Queries
-import { userQuery } from "./backend/routes/admin/accessUser";
+import { userQuery } from "./backend/routes/admin/accessUser.js";
 import { driverQuery } from "./backend/routes/queries/driverQuery.js";
 import { tripQuery } from "./backend/routes/queries/tripQuery.js";
 import { customQuery } from "./backend/routes/queries/customQuery.js";
