@@ -14,8 +14,6 @@ if (libPath && fs.existsSync(libPath)) {
 
 const userQuery = async (req, res) => {
     try {
-        console.log("\n--------------------\n");
-        console.log(req.body);
         const { fname, mname, lname, gender, area, city, state } =
             req.body;
         let { pincode, ageR1, ageR2 } = req.body;
@@ -29,7 +27,7 @@ const userQuery = async (req, res) => {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
 
-            query = `select CONCAT(c.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(c.PERSON_NAME.MNAME , CONCAT(' ', c.PERSON_NAME.LNAME)))) as Full_Name, GENDER as Gender, DOB as Birth_Date, c.AGE() as Age, EMAIL as Email, PHONE as Phone, AADHAR_NUMBER as Aadhar_Number from TRIP_MANAGEMENT_SYSTEM.client c where `;
+            query = `select CONCAT(c.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(c.PERSON_NAME.MNAME , CONCAT(' ', c.PERSON_NAME.LNAME)))) as Full_Name, GENDER as Gender, DOB as Birth_Date, c.AGE() as Age, EMAIL as Email, PHONE as Phone, AADHAR_NUMBER as Aadhar_Number, CONCAT(c.UADDRESS.houseNo, CONCAT(', ' , CONCAT(c.UADDRESS.street , CONCAT(', ' , CONCAT(c.UADDRESS.area , CONCAT(', ' , CONCAT(c.UADDRESS.city , CONCAT(', ' , CONCAT(c.UADDRESS.state , CONCAT(' - ' , c.UADDRESS.pincode)))))))))) as Address from TRIP_MANAGEMENT_SYSTEM.client c where `;
             query += fname ? `c.PERSON_NAME.FNAME like '%${fname}%' and ` : '';
             query += mname ? `c.PERSON_NAME.MNAME like '%${mname}%' and ` : '';
             query += lname ? `c.PERSON_NAME.LNAME like '%${lname}%' and ` : '';
@@ -47,7 +45,6 @@ const userQuery = async (req, res) => {
                 query = query.substr(0, query.length - 6);
 
             const result = await connection.execute(query);
-            console.log(result.metaData[0].name);
 
             let i = 0;
             var retrievedData = [];
@@ -60,6 +57,7 @@ const userQuery = async (req, res) => {
                     "Email": result.rows[i][4],
                     "Phone": result.rows[i][5],
                     "Aadhar_Number": result.rows[i][6],
+                    "Address": result.rows[i][7],
                 }
                 retrievedData.push(userInfo);
                 i++;
