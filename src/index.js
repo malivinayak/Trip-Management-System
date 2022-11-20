@@ -23,10 +23,10 @@ import { tripAccepting } from "./backend/routes/trip/tripAccepting.js";
 import { tripRating } from "./backend/routes/trip/tripRating.js";
 
 // Admin Queries
-import { userQuery } from "./backend/routes/queries/userQuery.js";
-import { driverQuery } from "./backend/routes/queries/driverQuery.js";
-import { tripQuery } from "./backend/routes/queries/tripQuery.js";
-import { customQuery } from "./backend/routes/queries/customQuery.js";
+import { userQuery } from "./backend/routes/admin/accessUser.js";
+import { driverQuery } from "./backend/routes/admin/accessDriver.js";
+import { tripQuery } from "./backend/routes/admin/accessTrip.js";
+import { customQuery } from "./backend/routes/admin/customQuery.js";
 
 // Wallet
 import { addMoney } from "./backend/routes/wallet/addMoney.js";
