@@ -15,7 +15,8 @@ const login = async (data) => {
 
     if (result.code === 200) {
       const token = result.data.token;
-      window.location.replace(`../${data.role}/?token=${token}`);
+      sessionStorage.setItem("token", token);
+      window.location.replace(`../${data.role}/`);
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
