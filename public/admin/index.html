@@ -43,6 +43,7 @@
         </li>
         <li id="driverTab"><a data-toggle="tab" href="#driver">Driver</a></li>
         <li id="tripTab"><a data-toggle="tab" href="#trip">Trip</a></li>
+        <li id="customTab"><a data-toggle="tab" href="#custom">Custom</a></li>
       </ul>
 
       <div class="tab-content">
@@ -1183,7 +1184,6 @@
                         </div>
                       </div>
                     </div>
-                    <!-- 2 columns, one for user name and one for driver name -->
                     <div
                       class="row"
                       style="
@@ -1252,6 +1252,67 @@
                         >
                           Get Data
                         </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="custom" class="tab-pane fade">
+          <h3 class="text-center">CUSTOM Query Form</h3>
+          <div class="container myForm" id="custom-form">
+            <div>
+              <form id="customQueryForm">
+                <div class="form-group">
+                  <div class="formdiv">
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Custom Query*</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          required
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="customQuery"
+                          placeholder="Enter your custom query to be executed"
+                        />
+                      </div>
+                      <div class="row btn-row">
+                        <div class="col-md-12">
+                          <button class="btn btn-default btn-lg" type="reset">
+                            Clear
+                          </button>
+                        </div>
+                        <div class="col-md-12">
+                          <button
+                            class="btn btn-default btn-lg next-btn"
+                            type="submit"
+                          >
+                            Get Data
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
