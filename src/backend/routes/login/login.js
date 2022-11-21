@@ -49,7 +49,7 @@ const login = async (req, res) => {
             } else if (role === "driver") {
                 query = `select * from TRIP_MANAGEMENT_SYSTEM.EMPLOYEE where USERNAME = :1`;
             } else {
-                query = `select * from TRIP_MANAGEMENT_SYSTEM.ADMIN where USERNAME = :1`;
+                query = `select * from TRIP_MANAGEMENT_SYSTEM.ADMIN where ADMINID = :1`;
             }
 
             const results = await connection.execute(query, [userName], options);
@@ -66,7 +66,7 @@ const login = async (req, res) => {
                 } else if (role === "driver") {
                     resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
                 } else {
-                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
+                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE ADMINID = :3`;
                 }
 
                 await connection.execute(resetTokenQuery, [null, userName], { autoCommit: true });
@@ -90,7 +90,7 @@ const login = async (req, res) => {
                 } else if (role === "driver") {
                     setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
                 } else {
-                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE USERID = :3`;
+                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE ADMINID = :3`;
                 }
 
                 await connection.execute(setTokenQuery, [token, userName], { autoCommit: true });
