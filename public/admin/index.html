@@ -41,6 +41,7 @@
         <li class="active" id="userTab">
           <a data-toggle="tab" href="#user">User</a>
         </li>
+        <li id="driverTab"><a data-toggle="tab" href="#driver">Driver</a></li>
       </ul>
 
       <div class="tab-content">
@@ -408,6 +409,565 @@
                         >
                           Get Data
                         </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="driver" class="tab-pane fade">
+          <h3 class="text-center">DRIVER Query Form</h3>
+          <div class="container myForm" id="driver-form">
+            <div>
+              <form id="driverQueryForm">
+                <div class="form-group">
+                  <div class="formdiv">
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Name</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="fname"
+                              placeholder="First Name"
+                              pattern="[A-Za-z]{2,18}"
+                              title="First Name should contain only alphabets and should be between 2 to 18 characters"
+                            />
+                          </div>
+                          <div class="col-md-4">
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="mname"
+                              placeholder="Middle Name"
+                              pattern="[A-Za-z]{2,18}"
+                              title="Middle Name should contain only alphabets and should be between 2 to 18 characters"
+                            />
+                          </div>
+                          <div class="col-md-4">
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="lname"
+                              placeholder="Last Name"
+                              pattern="[A-Za-z]{2,18}"
+                              title="Last Name should contain only alphabets and should be between 2 to 18 characters"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Gender</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <select
+                          class="form-control"
+                          style="font-family: Roboto, sans-serif"
+                          name="gender"
+                        >
+                          <option value="">Select Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Birth Date Range</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="birthDateR1"
+                              type="date"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="birthDateR2"
+                              type="date"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Age Range</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="ageR1"
+                              type="number"
+                              placeholder="Enter min Age"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="ageR2"
+                              type="number"
+                              placeholder="Enter max Age"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Area</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="area"
+                          placeholder="Enter Area"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>City</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="city"
+                          placeholder="Enter City"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>State</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="state"
+                          placeholder="Enter State"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Pincode</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="pincode"
+                          placeholder="Enter Pincode"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>License Expiry Date</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="expiryDateR1"
+                              type="date"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="expiryDateR2"
+                              type="date"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Rating</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="ratingR1"
+                              type="number"
+                              placeholder="Enter min Rating"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="ratingR2"
+                              type="number"
+                              placeholder="Enter max Rating"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Earning</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="earningR1"
+                              type="number"
+                              placeholder="Enter min Earning"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="earningR2"
+                              type="number"
+                              placeholder="Enter max Earning"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="row btn-row">
+                        <div class="col-md-12">
+                          <button class="btn btn-default btn-lg" type="reset">
+                            Clear
+                          </button>
+                        </div>
+                        <div class="col-md-12">
+                          <button
+                            class="btn btn-default btn-lg next-btn"
+                            type="submit"
+                          >
+                            Get Data
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
