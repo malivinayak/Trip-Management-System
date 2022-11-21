@@ -42,6 +42,7 @@
           <a data-toggle="tab" href="#user">User</a>
         </li>
         <li id="driverTab"><a data-toggle="tab" href="#driver">Driver</a></li>
+        <li id="tripTab"><a data-toggle="tab" href="#trip">Trip</a></li>
       </ul>
 
       <div class="tab-content">
@@ -968,6 +969,289 @@
                             Get Data
                           </button>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="trip" class="tab-pane fade">
+          <h3 class="text-center">TRIP Query Form</h3>
+          <div class="container myForm" id="trip-form">
+            <div>
+              <form id="tripQueryForm">
+                <div class="form-group">
+                  <div class="formdiv">
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>Starting Place</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="place1"
+                              placeholder="Enter Starting Place"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>Destination Place</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="place2"
+                              placeholder="Enter Destination Place"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>Start Time</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="datetime-local"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="dateTime1"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>End Time</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="datetime-local"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="dateTime2"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>AC</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <select
+                          class="form-control"
+                          style="font-family: Roboto, sans-serif"
+                          name="ac"
+                        >
+                          <option value="">Select</option>
+                          <option value="1">AC</option>
+                          <option value="0">Non-AC</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Fare Range</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="fareR1"
+                              type="number"
+                              placeholder="Enter min fare"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              style="font-family: Roboto, sans-serif"
+                              name="fareR2"
+                              type="number"
+                              placeholder="Enter max fare"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 2 columns, one for user name and one for driver name -->
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>User Name</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="userName"
+                              placeholder="Enter User Name"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <p
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                                font-size: 18px;
+                              "
+                            >
+                              <strong>Driver Name</strong>
+                            </p>
+                            <input
+                              class="form-control"
+                              type="text"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="driverName"
+                              placeholder="Enter Driver Name"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row btn-row">
+                      <div class="col-md-12">
+                        <button class="btn btn-default btn-lg" type="reset">
+                          Clear
+                        </button>
+                      </div>
+                      <div class="col-md-12">
+                        <button
+                          class="btn btn-default btn-lg next-btn"
+                          type="submit"
+                        >
+                          Get Data
+                        </button>
                       </div>
                     </div>
                   </div>
