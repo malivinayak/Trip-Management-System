@@ -14,9 +14,14 @@ if (libPath && fs.existsSync(libPath)) {
 
 const driverRegistration = async (req, res) => {
     try {
-        const { fname, mname, lname, userName, password, email, phone, dbo, gender, houseNo, street, area, city, state, pincode, aadharNumber, licenseNumber, expDate } =
+        const { fname, mname, lname, userName, password, email, gender, houseNo, street, area, city, state, licenseNumber } =
             req.body;
-
+        let { birthDate, phone, pincode, aadharNumber, expiryDate } = req.body;
+        phone = parseInt(phone);
+        pincode = parseInt(pincode);
+        aadharNumber = parseInt(aadharNumber);
+        expiryDate = new Date(expiryDate);
+        let dbo = new Date(birthDate);
         if (
             !fname ||
             !mname ||
@@ -35,7 +40,7 @@ const driverRegistration = async (req, res) => {
             !pincode ||
             !aadharNumber ||
             !licenseNumber ||
-            !expDate
+            !expiryDate
         ) {
             console.log("Not all fields provided!!!");
             return res.status(400).send({
@@ -45,7 +50,7 @@ const driverRegistration = async (req, res) => {
             });
         }
 
-        let connection, query, bind, options, result;
+        let connection, query, options, result;
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
@@ -113,11 +118,11 @@ const driverRegistration = async (req, res) => {
                 });
             }
 
-            const WALLET_BALANCE = 0, avgRating = 0, totalEarning = 0;
+            const WALLET_BALANCE = 0, avgRating = 0, totalEarning = 0, DRIVERID = userName;
 
             result = await connection.execute(
-                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER, DADDRESS, AADHAR_NUMBER, LINCENCE_NUMBER, EXP_DATE, AVG_RATING, TOTAL_EARING, WALLET_BALANCE) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9, new address(:10,:11,:12,:13,:14,:15), :16, :17, :18, :19, :20, :21 )`,
-                [fname, mname, lname, userName, password, email, phone, dbo, gender, houseNo, street, area, city, state, pincode, aadharNumber, licenseNumber, expDate, avgRating, totalEarning, WALLET_BALANCE],
+                `INSERT INTO Employee(PERSON_NAME, USERNAME, PASSWORD, EMAIL, PHONE, DOB, GENDER,  DADDRESS, AADHAR_NUMBER, LINCENCE_NUMBER, EXP_DATE, AVG_RATING, TOTAL_EARING, WALLET_BALANCE, DRIVERID) VALUES(new Name(:1,:2,:3), :4,:5,:6,:7,:8,:9, new address(:10,:11,:12,:13,:14,:15), :16, :17, :18, :19, :20, :21, :22 )`,
+                [fname, mname, lname, userName, password, email, phone, dbo, gender, houseNo, street, area, city, state, pincode, aadharNumber, licenseNumber, expiryDate, avgRating, totalEarning, WALLET_BALANCE, DRIVERID],
                 { autoCommit: true });
 
             return res.send({
