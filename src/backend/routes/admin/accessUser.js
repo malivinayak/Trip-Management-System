@@ -20,6 +20,8 @@ const userQuery = async (req, res) => {
         pincode = parseInt(pincode);
         ageR1 = parseInt(ageR1);
         ageR2 = parseInt(ageR2);
+        birthDateR1 = new Date(birthDateR1);
+        birthDateR2 = new Date(birthDateR2);
 
         let connection, query, options;
 
