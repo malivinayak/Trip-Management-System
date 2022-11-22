@@ -20,9 +20,11 @@ const userQuery = async (req, res) => {
         pincode = parseInt(pincode);
         ageR1 = parseInt(ageR1);
         ageR2 = parseInt(ageR2);
-        birthDateR1 = new Date(birthDateR1);
+        console.log(birthDateR1 + " & " + birthDateR2);
+        birthDateR1 = new Date(birthDateR1).getUTCDate;
         birthDateR2 = new Date(birthDateR2);
 
+        console.log(birthDateR1 + " & " + birthDateR2);
         let connection, query, options;
 
         try {
@@ -48,22 +50,16 @@ const userQuery = async (req, res) => {
 
             const result = await connection.execute(query);
 
-            let i = 0;
-            var retrievedData = [];
-            while (result.rows[i] !== undefined) {
-                var userInfo = {
-                    "Full_Name": result.rows[i][0],
-                    "Gender": result.rows[i][1],
-                    "Birth_Date": result.rows[i][2],
-                    "Age": result.rows[i][3],
-                    "Email": result.rows[i][4],
-                    "Phone": result.rows[i][5],
-                    "Aadhar_Number": result.rows[i][6],
-                    "Address": result.rows[i][7],
-                }
+            console.log(result.metaData[0].name);
+            let retrievedData = [];
+            result.rows?.forEach((row) => {
+                let userInfo = {};
+                result.metaData?.forEach((field, index) => {
+                    userInfo[field.name.replace("_", " ")] = row[index];
+                });
                 retrievedData.push(userInfo);
-                i++;
-            }
+            });
+
             if (result.rows[0] === undefined) {
                 return res.send({
                     message: "Data Retrieved ",
