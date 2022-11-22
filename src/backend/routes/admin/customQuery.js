@@ -32,17 +32,10 @@ const customQuery = async (req, res) => {
 
             }
             while (result.rows[i] !== undefined) {
-                var userInfo = {
-                    "Full_Name": result.rows[i][0],
-                    "Gender": result.rows[i][1],
-                    "Birth_Date": result.rows[i][2],
-                    "Age": result.rows[i][3],
-                    "Email": result.rows[i][4],
-                    "Phone": result.rows[i][5],
-                    "Aadhar_Number": result.rows[i][6],
-                    "Address": result.rows[i][7],
+                var resultData = {
+                    
                 }
-                retrievedData.push(userInfo);
+                retrievedData.push(resultData);
                 i++;
             }
             if (result.rows[0] === undefined) {
