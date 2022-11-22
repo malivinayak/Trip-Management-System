@@ -6,7 +6,7 @@ preferred vehicle.
 
 ## Documentation
 
-- [Idea Presentation](https://github.com/malivinayak/Trip-Management-System/blob/doc/doc/Idea%20Presentation/ADS%20PBL%20SRS%20PPT.pdf)
+- [Idea Presentation](./Idea%20Presentation/ADS%20PBL%20SRS%20PPT.pdf)
 
 - [Synopsis]()
 
