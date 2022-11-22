@@ -16,7 +16,7 @@ const userQuery = async (req, res) => {
     try {
         const { fname, mname, lname, gender, area, city, state } =
             req.body;
-        let { pincode, ageR1, ageR2 } = req.body;
+        let { pincode, ageR1, ageR2, birthDateR1, birthDateR2 } = req.body;
         pincode = parseInt(pincode);
         ageR1 = parseInt(ageR1);
         ageR2 = parseInt(ageR2);
