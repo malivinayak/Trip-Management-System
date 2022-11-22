@@ -8,6 +8,6 @@ preferred vehicle.
 
 - [Idea Presentation](./Idea%20Presentation/ADS%20PBL%20SRS%20PPT.pdf)
 
-- [Synopsis]()
+- [Synopsis](./Synopsis/Group_06_ADS_PBL_Synopsis.pdf)
 
 - [SRS](./SRS/Group_06_ADS_PBL_SRS.pdf)
