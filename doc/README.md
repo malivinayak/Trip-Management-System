@@ -10,4 +10,4 @@ preferred vehicle.
 
 - [Synopsis]()
 
-- [SRS](https://github.com/malivinayak/Trip-Management-System/blob/doc/doc/SRS/Group_06_ADS_PBL_SRS.docx)
+- [SRS](https://github.com/malivinayak/Trip-Management-System/blob/doc/doc/SRS/Group_06_ADS_PBL_SRS.pdf)
