@@ -10,4 +10,4 @@ preferred vehicle.
 
 - [Synopsis]()
 
-- [SRS](./SRS/Group%2006%20ADS%20PBL%20SRS.pdf)
+- [SRS](./SRS/Group_06_ADS_PBL_SRS.pdf)
