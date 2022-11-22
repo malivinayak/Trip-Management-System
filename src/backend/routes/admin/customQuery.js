@@ -21,8 +21,10 @@ const customQuery = async (req, res) => {
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
+            while(query.endsWith(" "))
+                query = query.substr(0, query.length - 1);
             if (query.endsWith(";"))
-            query = query.substr(0, query.length - 1);
+                query = query.substr(0, query.length - 1);
 
             const result = await connection.execute(query);
             let i = 0,rows,j=0;
