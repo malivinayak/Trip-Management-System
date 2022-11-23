@@ -16,14 +16,15 @@ const tripBooking = async (req, res) => {
     try {
         const { startPlace, endPlace, token } = req.body
         let { startTime, vehicleType, ac } = req.body;
-        ac = parseInt(ac);
         startTime = startTime.split("T");
         const startTripTime = `TIMESTAMP '${startTime[0]} ${startTime[1]}:00'`;
+
         if (
             !startPlace ||
             !endPlace ||
-            !startTime ||
+            !startTripTime ||
             !ac ||
+            !vehicleType ||
             !token
         ) {
             console.log("Not all fields provided!!!");
@@ -33,6 +34,7 @@ const tripBooking = async (req, res) => {
                 code: 400,
             });
         }
+        ac = parseInt(ac);
         let connection, query, options, result;
 
         try {
@@ -57,6 +59,7 @@ const tripBooking = async (req, res) => {
             const currentBalance = getUserData.rows[0].WALLET_BALANCE;
             const km = (Math.random() * 45) + 5;
             const fare = Math.round(km * (Math.floor(ac) ? 30 : 20));
+            let tripID;
             vehicleType = vehicleType == '1' ? 'Taxi' : 'Private';
 
             if (fare >= currentBalance) {
@@ -75,18 +78,19 @@ const tripBooking = async (req, res) => {
             const bookTrip = await connection.execute(insertQuery,
                 { tripID: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 40 } },
                 { autoCommit: true },);
-            console.log();
+            tripID = bookTrip.outBinds.tripID[0];
 
-
-            console.log(insertQuery);
+            const insertCBS = `Insert into CBS values('a','${tripID}', 0,${fare},${fare},0)`;
+            const updateCBS = await connection.execute(insertCBS, [],
+                { autoCommit: true },);
             const data = {
-                tripId: bookTrip.outBinds.tripID[0],
+                tripID,
                 km,
                 ac,
                 vehicleType,
                 fare,
             };
-
+            console.log(data);
             return res.send({
                 message: "Trip Booked Successful...",
                 status: "success",
