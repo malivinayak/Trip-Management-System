@@ -41,14 +41,14 @@ const sessionEnd = async (req, res) => {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,   // query result format
             };
             if (role === "user") {
-                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :1 WHERE USERID = :2`
+                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :1 WHERE Token = :2`
             } else if (role === "driver") {
-                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :1 WHERE USERID = :2`;
+                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :1 WHERE Token = :2`;
             } else {
-                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :1 WHERE USERID = :2`;
+                resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :1 WHERE Token = :2`;
             }
 
-            await connection.execute(resetTokenQuery, [null, userName], { autoCommit: true });
+            await connection.execute(resetTokenQuery, [null, token], { autoCommit: true });
 
             return res.send({
                 status: "success",
