@@ -64,7 +64,7 @@ const login = async (req, res) => {
                 if (role === "user") {
                     resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
                 } else if (role === "driver") {
-                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
+                    resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE DRIVERID = :3`;
                 } else {
                     resetTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE ADMINID = :3`;
                 }
@@ -88,7 +88,7 @@ const login = async (req, res) => {
                 if (role === "user") {
                     setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.client SET TOKEN = :2 WHERE USERID = :3`
                 } else if (role === "driver") {
-                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE USERID = :3`;
+                    setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET TOKEN = :2 WHERE DRIVERID = :3`;
                 } else {
                     setTokenQuery = `UPDATE TRIP_MANAGEMENT_SYSTEM.ADMIN SET TOKEN = :2 WHERE ADMINID = :3`;
                 }
