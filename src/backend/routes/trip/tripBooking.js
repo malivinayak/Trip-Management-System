@@ -35,7 +35,7 @@ const tripBooking = async (req, res) => {
             });
         }
         ac = parseInt(ac);
-        let connection, query, options, result;
+        let connection, query, options;
 
         try {
             // DB Connection
