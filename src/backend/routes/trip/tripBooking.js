@@ -90,7 +90,6 @@ const tripBooking = async (req, res) => {
                 vehicleType,
                 fare,
             };
-            console.log(data);
             return res.send({
                 message: "Trip Booked Successful...",
                 status: "success",
