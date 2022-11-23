@@ -100,7 +100,7 @@ const tripBooking = async (req, res) => {
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "User Registration Failed!!!",
+                message: "Trip Booking Failed!!!",
                 status: "failure",
                 code: 500,
             });
