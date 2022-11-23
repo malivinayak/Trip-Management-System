@@ -81,8 +81,7 @@ const tripBooking = async (req, res) => {
             tripID = bookTrip.outBinds.tripID[0];
 
             const insertCBS = `Insert into CBS values('a','${tripID}', 0,${fare},${fare},0)`;
-            const updateCBS = await connection.execute(insertCBS, [],
-                { autoCommit: true },);
+            await connection.execute(insertCBS, [], { autoCommit: true },);
             const data = {
                 tripID,
                 km,
