@@ -50,7 +50,7 @@ const getBalance = async (req, res) => {
             if (result.rows[0] === undefined) {
                 return res.send({
                     status: "failure",
-                    message: "Balance can no retrive at this time!!!",
+                    message: "Balance can no retrieve at this time!!!",
                     code: 400,
                 });
             }
@@ -68,7 +68,7 @@ const getBalance = async (req, res) => {
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Login Failed!!!",
+                message: "Balance Retrieval Failed!!!",
                 status: "failure",
                 code: 500,
             });
