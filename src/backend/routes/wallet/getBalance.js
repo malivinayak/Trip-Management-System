@@ -55,7 +55,6 @@ const getBalance = async (req, res) => {
                 });
             }
 
-            console.log(result.rows[0][0]);
             return res.send({
                 message: "Data Retrieved ",
                 status: "success",
