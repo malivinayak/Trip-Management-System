@@ -18,7 +18,7 @@ const getBalance = async (req, res) => {
     try {
         const { token } = req.body;
         let role = req.params.role;
-        console.log(req.body);
+
         if (!token) {
             return res.status(403).send({
                 status: "failure",
