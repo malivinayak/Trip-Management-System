@@ -64,12 +64,3 @@ const addMoney = async (req, res) => {
 }
 
 export { addMoney };
-
-
-
-
-
-
-
-
-
