@@ -42,6 +42,30 @@ const tripHistory = async (req, res) => {
             };
 
             //change query s per DB personal history
+
+            /*
+            For User History
+            0. Match token in CLIENT and take USERNAME
+            1. take CBSID from USERTRIP -> Match with CBSID in CBS
+            2. take TRIPID from CBS -> Match with TRIPID in TRIP
+            3. take USERID from TRIP -> Match with USERID in CLIENT
+            4. take DRIVERID from TRIP -> Match with DRIVERID in EMPLOYEE
+            
+            Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, trip_charge, driverName, driverPhone
+            */
+
+            /*
+            For Driver History
+            0. Match token in EMPLOYEE and take DRIVERID
+            1. take CBSID from DRIVETRIP -> Match with CBSID in CBS
+            2. take TRIPID from CBS -> Match with TRIPID in TRIP
+            3. take DRIVERID from TRIP -> Match with DRIVERID in CLIENT
+            4. take USERID from TRIP -> Match with USERID in CLIENT
+            5. take TRIPID from TRIP -> MATCH with TRIPID in RATING
+            
+            Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, rent, reward, rating, description 
+            */
+
             if (role === "user") {
                 query = `select * from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`
             } else if (role === "driver") {
