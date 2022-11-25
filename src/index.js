@@ -74,6 +74,6 @@ app.post("/api/trip/accepting", tripAccepting);
 app.post("/api/trip/rating", tripRating);
 
 //Wallet APIs
-app.post("/api/wallet/addMoney", addMoney);
 app.post("/api/cbs/withdraw-money", withdrawMoney);
+app.post("/api/cbs/add-money", addMoney);
 app.post("/api/cbs/get-balance/:role", getBalance);
