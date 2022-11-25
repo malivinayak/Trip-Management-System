@@ -40,8 +40,10 @@ const withdrawMoney = async (req, res) => {
         }
 
 
-        let connection, query;
+        let connection, query, options;
         try {
+            connection = await oracledb.getConnection(dbConfig);
+
             options = {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,
             };
