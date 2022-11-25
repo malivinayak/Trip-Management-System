@@ -7,9 +7,14 @@ th {
   text-transform: capitalize;
 }
 
-#dataTable {
+#dataTable1,
+#dataTable2 {
   display: none;
   padding-bottom: 40px;
+}
+
+#rating-form {
+  display: none;
 }
 
 .mydatatable,

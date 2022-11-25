@@ -47,6 +47,9 @@
         <li id="walletTab">
           <a data-toggle="tab" href="#wallet">Wallet</a>
         </li>
+        <li id="ratingTab">
+          <a data-toggle="tab" href="#rating">Rate Trip</a>
+        </li>
       </ul>
 
       <div class="tab-content">
@@ -262,7 +265,7 @@
               </form>
             </div>
           </div>
-          <section id="dataTable" class="mt-4">
+          <section id="dataTable1" class="mt-4">
             <div class="container-fluid">
               <div class="row">
                 <div class="col">
@@ -282,7 +285,7 @@
                       <div class="table-responsive table mb-0 pt-3 pe-2">
                         <table
                           tabindex="0"
-                          id="mydatatable"
+                          id="mydatatable1"
                           class="table table-striped table-sm my-0 mydatatable"
                         >
                           <thead>
@@ -361,6 +364,173 @@
               </form>
             </div>
           </div>
+        </div>
+        <div id="rating" class="tab-pane fade">
+          <div class="container myForm" id="get-trip-form">
+            <div>
+              <form id="getTripForm">
+                <div class="form-group">
+                  <div class="formdiv">
+                    <div class="col-md-12 text-center">
+                      <button class="btn btn-default btn-lg" type="submit">
+                        Get Trips
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="container myForm" id="rating-form">
+            <div>
+              <form id="ratingForm">
+                <div class="form-group">
+                  <div class="formdiv">
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Trip ID*</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          required
+                          class="form-control"
+                          type="number"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="tripId"
+                          min="1"
+                          placeholder="Enter Trip Id"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Rating*</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          required
+                          class="form-control"
+                          type="number"
+                          min="0"
+                          max="5"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="rating"
+                          placeholder="Enter Rating"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Feedback</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <input
+                          class="form-control"
+                          type="text"
+                          style="
+                            margin-left: 0px;
+                            font-family: Roboto, sans-serif;
+                          "
+                          name="feedback"
+                          placeholder="Enter feedback"
+                        />
+                      </div>
+                    </div>
+                    <div class="row btn-row">
+                      <div class="col-md-12">
+                        <button
+                          class="btn btn-default btn-lg next-btn"
+                          type="submit"
+                        >
+                          Rate Trip
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <section id="dataTable2" class="mt-4">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <div class="card shadow">
+                    <div class="card-header py-2">
+                      <h1 class="text-center text-info m-0">Rateable Trips</h1>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive table mb-0 pt-3 pe-2">
+                        <table
+                          tabindex="0"
+                          id="mydatatable2"
+                          class="table table-striped table-sm my-0 mydatatable"
+                        >
+                          <thead>
+                            <tr>
+                              <th>No data available</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
