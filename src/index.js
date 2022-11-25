@@ -31,6 +31,7 @@ import { customQuery } from "./backend/routes/admin/customQuery.js";
 // Wallet
 import { addMoney } from "./backend/routes/wallet/addMoney.js";
 import { withdrawMoney } from "./backend/routes/wallet/withdrawMoney.js";
+import { getBalance } from "./backend/routes/wallet/getBalance.js";
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const app = express();
@@ -75,3 +76,4 @@ app.post("/api/trip/rating", tripRating);
 //Wallet APIs
 app.post("/api/wallet/addMoney", addMoney);
 app.post("/api/wallet/withdrawMoney", withdrawMoney);
+app.post("/api/cbs/get-balance/:role", getBalance);
