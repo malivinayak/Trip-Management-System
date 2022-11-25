@@ -1,27 +1,25 @@
-"use strict";
-
-const getWalletBalance = async () => {
+const acceptTrip = async (data) => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 
   // Get token from sessionStorage
   const token = sessionStorage.getItem("token");
+  sessionStorage.removeItem("token");
 
   const arg = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      token: token,
-    }),
+    body: JSON.stringify({ ...data, token }),
   };
 
   try {
-    const response = await fetch(`/api/cbs/get-balance/user`, arg);
+    const response = await fetch(`/api/trip/accept`, arg);
     const result = await response.json();
 
-    if (result.code === 200 && result.data) {
-      document.getElementById("walletBalance").textContent = `Wallet Balance: ₹${result.data.balance}`;
+    if (result.code === 200) {
+      alert("Trip accepted successfully...");
+      document.querySelector("#acceptTripForm").reset();
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
@@ -35,4 +33,4 @@ const getWalletBalance = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 };
 
-export { getWalletBalance };
+export { acceptTrip };

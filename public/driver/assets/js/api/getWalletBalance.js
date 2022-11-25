@@ -17,7 +17,7 @@ const getWalletBalance = async () => {
   };
 
   try {
-    const response = await fetch(`/api/cbs/get-balance/user`, arg);
+    const response = await fetch(`/api/cbs/get-balance/driver`, arg);
     const result = await response.json();
 
     if (result.code === 200 && result.data) {
