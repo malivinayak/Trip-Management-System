@@ -49,7 +49,7 @@ const withdrawMoney = async (req, res) => {
             const getUserData = await connection.execute(getBalQuery, [token], options);
             if (getUserData.rows[0] === undefined) {
                 return res.status(403).send({
-                    message: "Invalid Token",
+                    message: "Something went wrong, please refresh the page and retry",
                     status: "failure",
                     code: 400,
                 });
@@ -57,17 +57,25 @@ const withdrawMoney = async (req, res) => {
             let currentBalance = getUserData.rows[0].WALLET_BALANCE;
             if (amount >= currentBalance) {
                 return res.send({
-                    message: "Insufficient Balance...",
+                    message: "Insufficient Balance...\nTry withdrawal with lower amount ",
                     status: "failure",
                     code: 405,
                 });
+            }
+            if (currentBalance < 100) {
+                return res.send({
+                    message: "Insufficient Balance. \nYou must maintain a minimum balance of Rs 100",
+                    status: "failure",
+                    code: 405,
+                });
+
             }
 
             currentBalance = currentBalance - amount;
             const updateBalance = `update TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET WALLET_BALANCE = ${currentBalance} where TOKEN = '${token}'`
             await connection.execute(updateBalance, [], { autoCommit: true });
             return res.send({
-                message: `🎉Balance withdrawal successful.......
+                message: `🎉 Balance withdrawal successful.......
 To Check updated balance click "Get Wallet Balance" button again`,
                 status: "success",
                 code: 200,
@@ -75,7 +83,7 @@ To Check updated balance click "Get Wallet Balance" button again`,
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Balance withdraw Failed!!!",
+                message: "Balance withdraw Failed!!!\nPlease try again later...",
                 status: "failure",
                 code: 500,
             });
