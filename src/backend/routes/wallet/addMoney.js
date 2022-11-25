@@ -51,7 +51,7 @@ const addMoney = async (req, res) => {
             const getCurrentBalance = await connection.execute(getBalQuery, [token], options);
             if (getCurrentBalance.rows[0] === undefined) {
                 return res.status(403).send({
-                    message: "Invalid Token",
+                    message: "Something went wrong!!!\nplease refresh the page and retry",
                     status: "failure",
                     code: 400,
                 });
@@ -62,7 +62,7 @@ const addMoney = async (req, res) => {
             query = `update TRIP_MANAGEMENT_SYSTEM.client SET WALLET_BALANCE = ${currentBalance} where TOKEN = '${token}'`;
             await connection.execute(query, [], { autoCommit: true });
             return res.send({
-                message: `🎉Balance Deposited success.......
+                message: `🎉 Balance Deposited success.......
 To Check updated balance click "Get Wallet Balance" button again`,
                 status: "success",
                 code: 200,
@@ -71,7 +71,7 @@ To Check updated balance click "Get Wallet Balance" button again`,
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Balance Deposit Failed!!!",
+                message: "Balance Deposit Failed!!!\nPlease try again later",
                 status: "failure",
                 code: 500,
             });
