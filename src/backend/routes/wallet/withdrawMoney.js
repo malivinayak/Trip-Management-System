@@ -62,16 +62,18 @@ const withdrawMoney = async (req, res) => {
                     code: 405,
                 });
             }
+            
+            currentBalance = currentBalance - amount;
+            const msg = `Can not withdraw ${amount} Rs currently\nYou must maintain a minimum balance of Rs 100\nTry with less amount`;
             if (currentBalance < 100) {
                 return res.send({
-                    message: "Insufficient Balance. \nYou must maintain a minimum balance of Rs 100",
+                    message: msg,
                     status: "failure",
                     code: 405,
                 });
 
             }
 
-            currentBalance = currentBalance - amount;
             const updateBalance = `update TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET WALLET_BALANCE = ${currentBalance} where TOKEN = '${token}'`
             await connection.execute(updateBalance, [], { autoCommit: true });
             return res.send({
