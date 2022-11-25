@@ -24,6 +24,12 @@ const addMoney = async (req, res) => {
                 message: "Minimum amount must be 10!!!",
                 code: 407,
             });
+        } else if (amount > 10000) {
+            return res.status(403).send({
+                status: "failure",
+                message: "You can not deposit more than 10k in single transaction!!!",
+                code: 407,
+            });
         }
         if (!token || !amount) {
             return res.status(403).send({
