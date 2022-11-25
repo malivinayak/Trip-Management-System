@@ -48,9 +48,9 @@ const withdrawMoney = async (req, res) => {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,
             };
 
-            query = `select WALLET_BALANCE from EMPLOYEE where TOKEN = :1`;
+            const getBalQuery = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.EMPLOYEE where TOKEN = :1`;
 
-            const getUserData = await connection.execute(query, [token], options);
+            const getUserData = await connection.execute(getBalQuery, [token], options);
             if (getUserData.rows[0] === undefined) {
                 return res.status(403).send({
                     message: "Invalid Token",
@@ -58,7 +58,7 @@ const withdrawMoney = async (req, res) => {
                     code: 400,
                 });
             }
-            const currentBalance = getUserData.rows[0].WALLET_BALANCE;
+            let currentBalance = getUserData.rows[0].WALLET_BALANCE;
 
             if (amount >= currentBalance) {
                 return res.send({
@@ -70,10 +70,10 @@ const withdrawMoney = async (req, res) => {
 
             currentBalance = currentBalance - amount;
             const updateBalance = `update TRIP_MANAGEMENT_SYSTEM.EMPLOYEE SET WALLET_BALANCE = ${currentBalance} where TOKEN = '${token}'`
-            // console.log(query);
-            await connection.execute(updateBalance);
+            await connection.execute(updateBalance, [], { autoCommit: true });
             return res.send({
-                message: "Balance withdraw success",
+                message: `🎉Balance withdrawal successful.......
+To Check updated balance click "Get Wallet Balance" button again`,
                 status: "success",
                 code: 200,
             });
