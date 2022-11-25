@@ -17,10 +17,10 @@ const withdrawMoney = async (req, res) => {
         const { token } = req.body;
         let { amount } = req.body;
         amount = parseInt(amount);
-        if (amount < 10) {
+        if (amount < 100) {
             return res.status(403).send({
                 status: "failure",
-                message: "Minimum withdrawal amount must be 10!!!",
+                message: "Minimum withdrawal amount must be 100!!!",
                 code: 407,
             });
         } else if (amount > 10000) {
