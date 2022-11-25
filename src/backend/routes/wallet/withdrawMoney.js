@@ -13,7 +13,6 @@ if (libPath && fs.existsSync(libPath)) {
 }
 
 const withdrawMoney = async (req, res) => {
-
     try {
         const { token } = req.body;
         let { amount } = req.body;
@@ -39,17 +38,14 @@ const withdrawMoney = async (req, res) => {
             });
         }
 
-
         let connection, query, options;
         try {
             connection = await oracledb.getConnection(dbConfig);
-
             options = {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,
             };
 
             const getBalQuery = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.EMPLOYEE where TOKEN = :1`;
-
             const getUserData = await connection.execute(getBalQuery, [token], options);
             if (getUserData.rows[0] === undefined) {
                 return res.status(403).send({
@@ -59,7 +55,6 @@ const withdrawMoney = async (req, res) => {
                 });
             }
             let currentBalance = getUserData.rows[0].WALLET_BALANCE;
-
             if (amount >= currentBalance) {
                 return res.send({
                     message: "Insufficient Balance...",
@@ -77,7 +72,6 @@ To Check updated balance click "Get Wallet Balance" button again`,
                 status: "success",
                 code: 200,
             });
-
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
@@ -101,7 +95,6 @@ To Check updated balance click "Get Wallet Balance" button again`,
             status: "failure",
             code: 500,
         });
-
     }
 }
 
