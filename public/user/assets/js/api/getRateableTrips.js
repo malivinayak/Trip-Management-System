@@ -2,7 +2,7 @@
 
 import { fillTable } from "../fillTable.js";
 
-const getBookingHistory = async () => {
+const getRateableTrips = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 
   // Get token from sessionStorage
@@ -19,11 +19,12 @@ const getBookingHistory = async () => {
   };
 
   try {
-    const response = await fetch(`/api/trip/history/user`, arg);
+    const response = await fetch(`/api/trip/rateable`, arg);
     const result = await response.json();
 
     if (result.code === 200 && result.data) {
-      fillTable(result.data, 1);
+      fillTable(result.data, 2);
+      document.getElementById("rating-form").style.display = "block";
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
@@ -37,4 +38,4 @@ const getBookingHistory = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 };
 
-export { getBookingHistory };
+export { getRateableTrips };

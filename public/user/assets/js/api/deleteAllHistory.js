@@ -21,7 +21,7 @@ const deleteAllHistory = async () => {
     const result = await response.json();
 
     if (result.code === 200) {
-      document.getElementById("dataTable").style.display = "none";
+      document.getElementById("dataTable1").style.display = "none";
       alert(result.message);
     } else if (result.code === 500) {
       throw new Error(result.message);

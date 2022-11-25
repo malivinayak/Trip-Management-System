@@ -1,8 +1,6 @@
 "use strict";
 
-import { fillTable } from "../fillTable.js";
-
-const getBookingHistory = async () => {
+const rateTrip = async (data) => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 
   // Get token from sessionStorage
@@ -14,16 +12,17 @@ const getBookingHistory = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      ...data,
       token: token,
     }),
   };
 
   try {
-    const response = await fetch(`/api/trip/history/user`, arg);
+    const response = await fetch(`/api/trip/rate`, arg);
     const result = await response.json();
 
-    if (result.code === 200 && result.data) {
-      fillTable(result.data, 1);
+    if (result.code === 200) {
+      alert(result.message);
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
@@ -37,4 +36,4 @@ const getBookingHistory = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 };
 
-export { getBookingHistory };
+export { rateTrip };

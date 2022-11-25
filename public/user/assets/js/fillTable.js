@@ -2,11 +2,11 @@
 
 import { setTable } from "./DataTable---Fully-BSS-Editable.js";
 
-const fillTable = (data) => {
+const fillTable = (data, tableNo) => {
   $(".mydatatable").DataTable().destroy();
 
-  document.getElementById("dataTable").style.display = "block";
-  const myTable = document.getElementById("mydatatable");
+  document.getElementById(`dataTable${tableNo}`).style.display = "block";
+  const myTable = document.getElementById(`mydatatable${tableNo}`);
 
   const myTableHead = myTable.getElementsByTagName("thead")[0];
   const myTableBody = myTable.getElementsByTagName("tbody")[0];
