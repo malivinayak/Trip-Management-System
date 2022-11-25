@@ -1,5 +1,16 @@
 import oracledb from 'oracledb';
 import { dbConfig } from '../../dbconfig.js';
+import fs from 'fs';
+
+let libPath;
+if (process.platform === 'win32') {           // Windows
+    libPath = 'C:\\oracle\\instantclient_19_12';
+} else if (process.platform === 'darwin') {   // macOS
+    libPath = process.env.HOME + '/Downloads/instantclient_19_8';
+}
+if (libPath && fs.existsSync(libPath)) {
+    oracledb.initOracleClient({ libDir: libPath });
+}
 
 const tripHistory = async (req, res) => {
     // console.log(req.body);
@@ -22,12 +33,62 @@ const tripHistory = async (req, res) => {
                 code: 403,
             });
         }
-    }
 
-    // else statement missing 
-    // query 
+        let connection, query, options;
+        try {
+            connection = await oracledb.getConnection(dbConfig);
+            options = {
+                outFormat: oracledb.OUT_FORMAT_OBJECT,
+            };
 
-    catch (err) {
+            //change query s per DB personal history
+            if (role === "user") {
+                query = `select * from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`
+            } else if (role === "driver") {
+                query = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`;
+            }
+
+            //query execution here
+
+
+            if (result.rows[0] === undefined) {
+                return res.send({
+                    message: "Data Retrieved ",
+                    status: "success",
+                    code: 200,
+                    data: {
+                        properties: [],
+                        values: [],
+                    },
+                });
+            }
+            return res.send({
+                message: "Data Retrieved ",
+                status: "success",
+                code: 200,
+                data: {
+                    properties: Object.getOwnPropertyNames(retrievedData[0]),
+                    values: retrievedData,
+                },
+            });
+        } catch (err) {
+            console.log(" Error at Data Base : " + err);
+            return res.status(500).send({
+                message: "Balance Retrieval Failed!!!",
+                status: "failure",
+                code: 500,
+            });
+        } finally {
+            if (connection) {
+                try {
+                    await connection.close();
+                } catch (err) {
+                    console.error("Connection Close Error :" + err);
+                }
+            }
+        }
+
+    } catch (err) {
         console.log(err);
         return res.status(500).send({
             message: "Something went Wrong!!!",
