@@ -5,7 +5,6 @@ const getAvailableTrips = async () => {
 
   // Get token from sessionStorage
   const token = sessionStorage.getItem("token");
-  sessionStorage.removeItem("token");
 
   const arg = {
     method: "POST",

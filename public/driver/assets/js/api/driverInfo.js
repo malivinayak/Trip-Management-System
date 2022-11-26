@@ -3,7 +3,6 @@
 
   // Get token from sessionStorage
   const token = sessionStorage.getItem("token");
-  sessionStorage.removeItem("token");
 
   if (!token) {
     window.location.replace("../login/");
