@@ -52,17 +52,14 @@ const tripHistory = async (req, res) => {
                         t.ISAC as AC, 
                         t.VEHICAL_TYPE as Vehicle_Type, 
                         c.STATUS as Trip_Status, 
-                        c.TRIP_CHARGE as Trip_Charge,
-                        CONCAT(d.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(d.PERSON_NAME.MNAME , CONCAT(' ', d.PERSON_NAME.LNAME)))) as Driver_Name,
-                        d.PHONE as  Driver_Phone_Number
-                    FROM USERTRIP ut, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+                        c.TRIP_CHARGE as Trip_Charge
+                    FROM USERTRIP ut, CBS c, TRIP t, CLIENT u
                     where 
                         u.TOKEN = :1 and
                         t.USERID = u.USERID and
                         ut.CBSID = c.CBSID and
                         c.TRIPID = t.TRIPID and
-                        t.DRIVERID = d.DRIVERID and
-                        c.STATUS = 1`;
+                        c.STATUS = 0`;
             } else if (role === "driver") {
                 query = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`;
             }
@@ -141,7 +138,7 @@ Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, st
 */
 
 //take username using token with select query
-/*
+
 // when trip is not completed
 let getTrip =
     `SELECT 
@@ -154,10 +151,10 @@ let getTrip =
     c.TRIP_CHARGE as Trip_Charge
 FROM USERTRIP ut, CBS c, TRIP t, CLIENT u
 where 
-    u.TOKEN = ${token} and
+    u.TOKEN = :1 and
+    t.USERID = u.USERID and
     ut.CBSID = c.CBSID and
     c.TRIPID = t.TRIPID and
-    t.USERID = u.USERID and
     c.STATUS = 0`;
 
 // when trip is completed
@@ -174,13 +171,13 @@ getTrip =
     d.PHONE as  Driver_Phone_Number
 FROM USERTRIP ut, CBS c, TRIP t, CLIENT u, EMPLOYEE d
 where 
-    u.TOKEN = ${token} and
+    u.TOKEN = :1 and
     t.USERID = u.USERID and
     ut.CBSID = c.CBSID and
     c.TRIPID = t.TRIPID and
     t.DRIVERID = d.DRIVERID and
     c.STATUS = 1`;
-*/
+
 /*
 For Driver History
 0. Match token in EMPLOYEE and take DRIVERID
