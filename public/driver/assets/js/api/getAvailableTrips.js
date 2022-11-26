@@ -1,10 +1,11 @@
-"use strict";
+import { fillTable } from "../fillTable.js";
 
-const getWalletBalance = async () => {
+const getAvailableTrips = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 
   // Get token from sessionStorage
   const token = sessionStorage.getItem("token");
+  sessionStorage.removeItem("token");
 
   const arg = {
     method: "POST",
@@ -17,11 +18,11 @@ const getWalletBalance = async () => {
   };
 
   try {
-    const response = await fetch(`/api/cbs/get-balance/user`, arg);
+    const response = await fetch(`/api/trip/available`, arg);
     const result = await response.json();
 
     if (result.code === 200 && result.data) {
-      document.getElementById("walletBalance").textContent = `Wallet Balance: ₹${result.data.balance}`;
+      fillTable(result.data, 1);
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
@@ -29,10 +30,10 @@ const getWalletBalance = async () => {
     }
   } catch (error) {
     console.log(error);
-    alert("Something went wrong!!!\nPlease try again later!");
+    alert("Error while loading available trips!!!\nPlease try again later!");
   }
 
   document.querySelector(".loadingContainer").classList.toggle("loading");
 };
 
-export { getWalletBalance };
+export { getAvailableTrips };

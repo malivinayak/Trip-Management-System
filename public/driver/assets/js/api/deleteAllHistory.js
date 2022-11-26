@@ -1,6 +1,6 @@
 "use strict";
 
-const getWalletBalance = async () => {
+const deleteAllHistory = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 
   // Get token from sessionStorage
@@ -17,11 +17,12 @@ const getWalletBalance = async () => {
   };
 
   try {
-    const response = await fetch(`/api/cbs/get-balance/user`, arg);
+    const response = await fetch(`/api/trip/delete/driver`, arg);
     const result = await response.json();
 
-    if (result.code === 200 && result.data) {
-      document.getElementById("walletBalance").textContent = `Wallet Balance: ₹${result.data.balance}`;
+    if (result.code === 200) {
+      document.getElementById("dataTable").style.display = "none";
+      alert(result.message);
     } else if (result.code === 500) {
       throw new Error(result.message);
     } else {
@@ -35,4 +36,4 @@ const getWalletBalance = async () => {
   document.querySelector(".loadingContainer").classList.toggle("loading");
 };
 
-export { getWalletBalance };
+export { deleteAllHistory };
