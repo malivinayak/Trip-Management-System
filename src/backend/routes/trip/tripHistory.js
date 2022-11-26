@@ -19,7 +19,7 @@ const tripHistory = async (req, res) => {
     try {
         const { token } = req.body;
         const role = req.params.role;
-
+        // console.log(req.body);
         if (!token || !role) {
             return res.status(400).json({
                 status: "error",
@@ -61,11 +61,33 @@ const tripHistory = async (req, res) => {
                         c.TRIPID = t.TRIPID and
                         c.STATUS = 0`;
             } else if (role === "driver") {
-                query = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`;
+                query = `SELECT 
+                t.TRIPID, 
+                t.PLACE.pickup_place as Start_Place, 
+                t.PLACE.drop_place as End_Place, 
+                t.ISAC as AC, 
+                t.VEHICAL_TYPE as Vehicle_Type, 
+                t.TRIP_TIME.start_dateTime as Start_Time,
+                t.TRIP_TIME.end_dateTime as End_Time,
+                c.STATUS as Trip_Status, 
+                c.RENT as Trip_Charge,
+                c.REWARD as Reward,
+                CONCAT(u.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(u.PERSON_NAME.MNAME , CONCAT(' ', u.PERSON_NAME.LNAME)))) as User_Name,
+                u.PHONE as  User_Phone_Number
+            FROM 
+                DRIVETRIP dt, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+            WHERE 
+                d.TOKEN = :1 and
+                t.DRIVERID = d.DRIVERID and
+                dt.CBSID = c.CBSID and
+                c.TRIPID = t.TRIPID and
+                t.USERID = u.USERID`;
             }
 
             //query execution here
             const result = await connection.execute(query, [token]);
+
+            console.log(result);
 
             let retrievedData = [];
             result.rows?.forEach((row) => {
@@ -189,3 +211,27 @@ For Driver History
 
 Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, rent, reward, rating, description 
 */
+
+getTrip =
+    `SELECT 
+    t.TRIPID, 
+    t.PLACE.pickup_place as Start_Place, 
+    t.PLACE.drop_place as End_Place, 
+    t.ISAC as AC, 
+    t.VEHICAL_TYPE as Vehicle_Type, 
+    t.TRIP_TIME.start_dateTime as Start_Time,
+    t.TRIP_TIME.end_dateTime as End_Time,
+    c.STATUS as Trip_Status, 
+    c.RENT as Trip_Charge,
+    c.REWARD as Reward,
+    CONCAT(u.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(u.PERSON_NAME.MNAME , CONCAT(' ', u.PERSON_NAME.LNAME)))) as User_Name,
+    u.PHONE as  User_Phone_Number
+FROM 
+    DRIVETRIP dt, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+WHERE 
+    d.TOKEN = :1 and
+    t.DRIVERID = d.DRIVERID and
+    dt.CBSID = c.CBSID and
+    c.TRIPID = t.TRIPID and
+    t.USERID = u.USERID
+`;
