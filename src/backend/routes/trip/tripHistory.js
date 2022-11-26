@@ -61,7 +61,8 @@ const tripHistory = async (req, res) => {
                         t.USERID = u.USERID and
                         ut.CBSID = c.CBSID and
                         c.TRIPID = t.TRIPID and
-                        t.DRIVERID = d.DRIVERID`;
+                        t.DRIVERID = d.DRIVERID and
+                        c.STATUS = 1`;
             } else if (role === "driver") {
                 query = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`;
             }
