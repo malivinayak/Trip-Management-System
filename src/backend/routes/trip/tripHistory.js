@@ -43,23 +43,65 @@ const tripHistory = async (req, res) => {
 
             //change query s per DB personal history
 
-
+            let retrievedData = [], result;
             if (role === "user") {
                 query = `SELECT 
-                        t.TRIPID, 
-                        t.PLACE.pickup_place as Start_Place, 
-                        t.PLACE.drop_place as End_Place, 
-                        t.ISAC as AC, 
-                        t.VEHICAL_TYPE as Vehicle_Type, 
-                        c.STATUS as Trip_Status, 
-                        c.TRIP_CHARGE as Trip_Charge
-                    FROM USERTRIP ut, CBS c, TRIP t, CLIENT u
-                    where 
-                        u.TOKEN = :1 and
-                        t.USERID = u.USERID and
-                        ut.CBSID = c.CBSID and
-                        c.TRIPID = t.TRIPID and
-                        c.STATUS = 0`;
+                t.TRIPID, 
+                t.PLACE.pickup_place as Start_Place, 
+                t.PLACE.drop_place as End_Place, 
+                t.ISAC as AC, 
+                t.VEHICAL_TYPE as Vehicle_Type, 
+                c.STATUS as Trip_Status, 
+                c.TRIP_CHARGE as Trip_Charge
+            FROM USERTRIP ut, CBS c, TRIP t, CLIENT u
+            where 
+                u.TOKEN = :1 and
+                t.USERID = u.USERID and
+                ut.CBSID = c.CBSID and
+                c.TRIPID = t.TRIPID and
+                c.STATUS = 0`;
+                result = await connection.execute(query, [token]);
+                console.log(result);
+                console.log(token);
+                console.log("----------------------");
+                result.rows?.forEach((row) => {
+                    let userInfo = {};
+                    result.metaData?.forEach((field, index) => {
+                        userInfo[field.name.replaceAll("_", " ")] = row[index];
+                    });
+                    userInfo['DRIVER NAME'] = 'Not Assigned';
+                    userInfo['DRIVER PHONE NUMBER'] = 'Not Assigned';
+                    retrievedData.push(userInfo);
+                });
+                query = `SELECT 
+                t.TRIPID, 
+                t.PLACE.pickup_place as Start_Place, 
+                t.PLACE.drop_place as End_Place, 
+                t.ISAC as AC, 
+                t.VEHICAL_TYPE as Vehicle_Type, 
+                c.STATUS as Trip_Status, 
+                c.TRIP_CHARGE as Trip_Charge,
+                CONCAT(d.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(d.PERSON_NAME.MNAME , CONCAT(' ', d.PERSON_NAME.LNAME)))) as Driver_Name,
+                d.PHONE as  Driver_Phone_Number
+            FROM USERTRIP ut, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+            where 
+                u.TOKEN = :1 and
+                t.USERID = u.USERID and
+                ut.CBSID = c.CBSID and
+                c.TRIPID = t.TRIPID and
+                t.DRIVERID = d.DRIVERID and
+                c.STATUS = 1`;
+                result = await connection.execute(query, [token]);
+                console.log(result);
+                console.log(token);
+                console.log("----------------------");
+                result.rows?.forEach((row) => {
+                    let userInfo = {};
+                    result.metaData?.forEach((field, index) => {
+                        userInfo[field.name.replaceAll("_", " ")] = row[index];
+                    });
+                    retrievedData.push(userInfo);
+                });
             } else if (role === "driver") {
                 query = `SELECT 
                 t.TRIPID, 
@@ -82,21 +124,25 @@ const tripHistory = async (req, res) => {
                 dt.CBSID = c.CBSID and
                 c.TRIPID = t.TRIPID and
                 t.USERID = u.USERID`;
+                result = await connection.execute(query, [token]);
+                result.rows?.forEach((row) => {
+                    let userInfo = {};
+                    result.metaData?.forEach((field, index) => {
+                        userInfo[field.name.replaceAll("_", " ")] = row[index];
+                    });
+                    retrievedData.push(userInfo);
+                });
             }
 
             //query execution here
-            const result = await connection.execute(query, [token]);
-
-            console.log(result);
-
-            let retrievedData = [];
-            result.rows?.forEach((row) => {
-                let userInfo = {};
-                result.metaData?.forEach((field, index) => {
-                    userInfo[field.name.replace("_", " ")] = row[index];
-                });
-                retrievedData.push(userInfo);
-            });
+            // result = await connection.execute(query, [token]);
+            // result.rows?.forEach((row) => {
+            //     let userInfo = {};
+            //     result.metaData?.forEach((field, index) => {
+            //         userInfo[field.name.replace("_", " ")] = row[index];
+            //     });
+            //     retrievedData.push(userInfo);
+            // });
 
             if (result.rows[0] === undefined) {
                 return res.send({
