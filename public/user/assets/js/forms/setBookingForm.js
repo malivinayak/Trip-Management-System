@@ -35,7 +35,7 @@ Start Time: ${bookingInfo.startTime.replace("T", " ")}
 Vehicle Type: ${bookingInfo.vehicleType === "0" ? "Private" : "Taxi"}
 AC: ${bookingInfo.ac === "1" ? "Yes" : "No"}
 
-Cost per KM: Rs. ${(bookingInfo.vehicleType === "0" ? 30 : 20) + (bookingInfo.ac === "1" ? 10 : 0)}
+Cost per KM: ₹${(bookingInfo.vehicleType === "0" ? 30 : 20) + (bookingInfo.ac === "1" ? 10 : 0)}
 `);
 
     if (!confirmation) return;
