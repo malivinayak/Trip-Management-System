@@ -40,7 +40,7 @@ const deleteTripHistory = async (req, res) => {
             let query, result;
 
             if (role === "user") {
-                query = `select*from USERTRIP 
+                query = `delete from USERTRIP 
                         where USERTRIP.CBSID IN (
                             Select c.CBSID from CBS c, Client u, Trip t
                             where t.TRIPID = c.TRIPID and
