@@ -43,37 +43,40 @@ const tripHistory = async (req, res) => {
 
             //change query s per DB personal history
 
-            /*
-            For User History
-            0. Match token in CLIENT and take USERNAME
-            1. take CBSID from USERTRIP -> Match with CBSID in CBS
-            2. take TRIPID from CBS -> Match with TRIPID in TRIP
-            3. take USERID from TRIP -> Match with USERID in CLIENT
-            4. take DRIVERID from TRIP -> Match with DRIVERID in EMPLOYEE
-            
-            Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, trip_charge, driverName, driverPhone
-            */
-
-            /*
-            For Driver History
-            0. Match token in EMPLOYEE and take DRIVERID
-            1. take CBSID from DRIVETRIP -> Match with CBSID in CBS
-            2. take TRIPID from CBS -> Match with TRIPID in TRIP
-            3. take DRIVERID from TRIP -> Match with DRIVERID in CLIENT
-            4. take USERID from TRIP -> Match with USERID in CLIENT
-            5. take TRIPID from TRIP -> MATCH with TRIPID in RATING
-            
-            Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, rent, reward, rating, description 
-            */
 
             if (role === "user") {
-                query = `select * from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`
+                query = `SELECT 
+                        t.TRIPID, 
+                        t.PLACE.pickup_place as Start_Place, 
+                        t.PLACE.drop_place as End_Place, 
+                        t.ISAC as AC, 
+                        t.VEHICAL_TYPE as Vehicle_Type, 
+                        c.STATUS as Trip_Status, 
+                        c.TRIP_CHARGE as Trip_Charge,
+                        CONCAT(d.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(d.PERSON_NAME.MNAME , CONCAT(' ', d.PERSON_NAME.LNAME)))) as Driver_Name,
+                        d.PHONE as  Driver_Phone_Number
+                    FROM USERTRIP ut, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+                    where 
+                        u.TOKEN = :1 and
+                        t.USERID = u.USERID and
+                        ut.CBSID = c.CBSID and
+                        c.TRIPID = t.TRIPID and
+                        t.DRIVERID = d.DRIVERID`;
             } else if (role === "driver") {
                 query = `select WALLET_BALANCE from TRIP_MANAGEMENT_SYSTEM.TRIP where TOKEN = '${token}'`;
             }
 
             //query execution here
+            const result = await connection.execute(query, [token]);
 
+            let retrievedData = [];
+            result.rows?.forEach((row) => {
+                let userInfo = {};
+                result.metaData?.forEach((field, index) => {
+                    userInfo[field.name.replace("_", " ")] = row[index];
+                });
+                retrievedData.push(userInfo);
+            });
 
             if (result.rows[0] === undefined) {
                 return res.send({
@@ -123,3 +126,68 @@ const tripHistory = async (req, res) => {
 };
 
 export { tripHistory };
+
+
+/*
+For User History
+0. Match token in CLIENT and take USERNAME
+1. take CBSID from USERTRIP -> Match with CBSID in CBS
+2. take TRIPID from CBS -> Match with TRIPID in TRIP
+3. take USERID from TRIP -> Match with USERID in CLIENT
+4. take DRIVERID from TRIP -> Match with DRIVERID in EMPLOYEE
+
+Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, trip_charge, driverName, driverPhone
+*/
+
+//take username using token with select query
+/*
+// when trip is not completed
+let getTrip =
+    `SELECT 
+    t.TRIPID, 
+    t.PLACE.pickup_place as Start_Place, 
+    t.PLACE.drop_place as End_Place, 
+    t.ISAC as AC, 
+    t.VEHICAL_TYPE as Vehicle_Type, 
+    c.STATUS as Trip_Status, 
+    c.TRIP_CHARGE as Trip_Charge
+FROM USERTRIP ut, CBS c, TRIP t, CLIENT u
+where 
+    u.TOKEN = ${token} and
+    ut.CBSID = c.CBSID and
+    c.TRIPID = t.TRIPID and
+    t.USERID = u.USERID and
+    c.STATUS = 0`;
+
+// when trip is completed
+getTrip =
+    `SELECT 
+    t.TRIPID, 
+    t.PLACE.pickup_place as Start_Place, 
+    t.PLACE.drop_place as End_Place, 
+    t.ISAC as AC, 
+    t.VEHICAL_TYPE as Vehicle_Type, 
+    c.STATUS as Trip_Status, 
+    c.TRIP_CHARGE as Trip_Charge,
+    CONCAT(d.PERSON_NAME.FNAME , CONCAT(' ', CONCAT(d.PERSON_NAME.MNAME , CONCAT(' ', d.PERSON_NAME.LNAME)))) as Driver_Name,
+    d.PHONE as  Driver_Phone_Number
+FROM USERTRIP ut, CBS c, TRIP t, CLIENT u, EMPLOYEE d
+where 
+    u.TOKEN = ${token} and
+    t.USERID = u.USERID and
+    ut.CBSID = c.CBSID and
+    c.TRIPID = t.TRIPID and
+    t.DRIVERID = d.DRIVERID and
+    c.STATUS = 1`;
+*/
+/*
+For Driver History
+0. Match token in EMPLOYEE and take DRIVERID
+1. take CBSID from DRIVETRIP -> Match with CBSID in CBS
+2. take TRIPID from CBS -> Match with TRIPID in TRIP
+3. take DRIVERID from TRIP -> Match with DRIVERID in CLIENT
+4. take USERID from TRIP -> Match with USERID in CLIENT
+5. take TRIPID from TRIP -> MATCH with TRIPID in RATING
+
+Display: TRIPID, Place(StartPlace, EndPlace), isAC, Vechical_type, startTime, status, rent, reward, rating, description 
+*/
