@@ -72,6 +72,11 @@ const customQuery = async (req, res) => {
                 });
             }
 
+            if (customQuery.includes('from user'))
+                customQuery = customQuery.replace('from user', 'from CLIENT')
+            if (customQuery.includes('from driver'))
+                customQuery = customQuery.replace('from driver', 'from EMPLOYEE')
+
             const result = await connection.execute(customQuery);
             let retrievedData = [];
             result.rows?.forEach((row) => {
