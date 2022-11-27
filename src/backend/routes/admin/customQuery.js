@@ -29,8 +29,14 @@ const customQuery = async (req, res) => {
                 customQuery = customQuery.substring(0, customQuery.length - 1);
 
             const result = await connection.execute(customQuery);
-            var retrievedData = [];
-
+            let retrievedData = [];
+            result.rows?.forEach((row) => {
+                let userInfo = {};
+                result.metaData?.forEach((field, index) => {
+                    userInfo[field.name.replace("_", " ")] = row[index];
+                });
+                retrievedData.push(userInfo);
+            });
 
             if (retrievedData.length === 0) {
                 return res.send({
