@@ -28,6 +28,14 @@ const customQuery = async (req, res) => {
             if (customQuery.endsWith(";"))
                 customQuery = customQuery.substring(0, customQuery.length - 1);
 
+            if (customQuery.includes('insert')) {
+                return res.send({
+                    message: "🚫 Read only access\nCan not perform any write operation",
+                    status: "restricted",
+                    code: 408,
+                });
+            }
+
             const result = await connection.execute(customQuery);
             let retrievedData = [];
             result.rows?.forEach((row) => {
