@@ -36,7 +36,7 @@ const customQuery = async (req, res) => {
                 });
             } if (customQuery.includes('update')) {
                 return res.send({
-                    message: "🚫 Read only access\nCan not perform any update operation",
+                    message: "⚠️ Read only access\nCan not perform any update operation",
                     status: "restricted",
                     code: 408,
                 });
