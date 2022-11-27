@@ -15,32 +15,22 @@ if (libPath && fs.existsSync(libPath)) {
 const customQuery = async (req, res) => {
     try {
         const { query } = req.body;
-        
+
         let connection;
 
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
-            while(query.endsWith(" "))
+            while (query.endsWith(" "))
                 query = query.substr(0, query.length - 1);
             if (query.endsWith(";"))
                 query = query.substr(0, query.length - 1);
 
             const result = await connection.execute(query);
-            let i = 0,rows,j=0;
             var retrievedData = [];
 
-            while(result.metaData[j] !== undefined){
 
-            }
-            while (result.rows[i] !== undefined) {
-                var resultData = {
-                    
-                }
-                retrievedData.push(resultData);
-                i++;
-            }
-            if (result.rows[0] === undefined) {
+            if (retrievedData.length === 0) {
                 return res.send({
                     message: "Data Retrieved ",
                     status: "success",
@@ -64,7 +54,7 @@ const customQuery = async (req, res) => {
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Admin Access for Custom Query Failed due to DB Error!!!\n"+err,
+                message: "Admin Access for Custom Query Failed due to DB Error!!!\n" + err,
                 status: "failure",
                 code: 500,
             });
