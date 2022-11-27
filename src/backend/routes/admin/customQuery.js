@@ -25,10 +25,11 @@ const customQuery = async (req, res) => {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
             customQuery = customQuery.toLowerCase();
+
             customQuery = customQuery.trim();
             if (customQuery.endsWith(";"))
                 customQuery = customQuery.substring(0, customQuery.length - 1);
-            console.log(customQuery);
+
             if (customQuery.includes('insert into')) {
                 return res.send({
                     message: "🚫 Read only access : Can not perform any write operation\n🔑 NOTE: Only SELECT Query can be performed",
