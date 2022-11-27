@@ -14,6 +14,7 @@ if (libPath && fs.existsSync(libPath)) {
 
 const customQuery = async (req, res) => {
     try {
+        console.log(req.body);
         const { query } = req.body;
 
         let connection;
