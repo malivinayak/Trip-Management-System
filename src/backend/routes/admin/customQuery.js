@@ -24,19 +24,49 @@ const customQuery = async (req, res) => {
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
+            customQuery = customQuery.toLowerCase();
             customQuery = customQuery.trim();
             if (customQuery.endsWith(";"))
                 customQuery = customQuery.substring(0, customQuery.length - 1);
-
-            if (customQuery.includes('insert')) {
+            console.log(customQuery);
+            if (customQuery.includes('insert into')) {
                 return res.send({
-                    message: "🚫 Read only access\nCan not perform any write operation",
+                    message: "🚫 Read only access : Can not perform any write operation\n🔑 NOTE: Only SELECT Query can be performed",
                     status: "restricted",
                     code: 408,
                 });
-            } if (customQuery.includes('update')) {
+            } if (customQuery.includes('update') && customQuery.includes('set')) {
                 return res.send({
-                    message: "⚠️ Read only access\nCan not perform any update operation",
+                    message: "⚠️ Read only access : Can not perform any Manipulation operation\n🔑 NOTE: Only SELECT Query can be performed",
+                    status: "restricted",
+                    code: 408,
+                });
+            } if (customQuery.includes('create') ||
+                customQuery.includes('alter')) {
+                return res.send({
+                    message: "⛔ Read only access : Can not perform any definition operation\n🔑 NOTE: Only SELECT Query can be performed",
+                    status: "restricted",
+                    code: 408,
+                });
+            } if (customQuery.includes('delete') ||
+                customQuery.includes('truncate')) {
+                return res.send({
+                    message: "💀 Read only access : Can not perform any deletion operation\n🔑 NOTE: Only SELECT Query can be performed",
+                    status: "restricted",
+                    code: 408,
+                });
+            } if (customQuery.includes('grant') ||
+                customQuery.includes('revoke')) {
+                return res.send({
+                    message: "☣ Read only access : Can not perform any control operation\n🔑 NOTE: Only SELECT Query can be performed",
+                    status: "restricted",
+                    code: 408,
+                });
+            } if (customQuery.includes('commit') ||
+                customQuery.includes('rollback') ||
+                customQuery.includes('save point')) {
+                return res.send({
+                    message: "☠ Read only access : Can not perform commit or rollback operation\n🔑 NOTE: Only SELECT Query can be performed",
                     status: "restricted",
                     code: 408,
                 });
