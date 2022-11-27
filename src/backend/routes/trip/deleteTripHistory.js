@@ -13,7 +13,6 @@ if (libPath && fs.existsSync(libPath)) {
 }
 
 const deleteTripHistory = async (req, res) => {
-    console.log("Deletign TRIP History");
     const roles = ["user", "driver"];
 
     try {
@@ -48,7 +47,13 @@ const deleteTripHistory = async (req, res) => {
                             u.TOKEN = '${token}'
                         )`;
             } else if (role === "driver") {
-                query = `TRUNCATE TABLE DRIVETRIP`;
+                query = `delete from DRIVETRIP 
+                        where DRIVETRIP.CBSID IN (
+                            Select c.CBSID from CBS c, EMPLOYEE d, Trip t
+                            where t.TRIPID = c.TRIPID and
+                            d.DRIVERID = t.DRIVERID and
+                            d.TOKEN = '${token}'
+                        )`;
             }
 
             result = await connection.execute(query, [], { autoCommit: true });
