@@ -82,6 +82,7 @@ const customQuery = async (req, res) => {
             result.rows?.forEach((row) => {
                 let userInfo = {};
                 result.metaData?.forEach((field, index) => {
+                    if (field.name == 'PASSWORD') return;
                     userInfo[field.name.replace("_", " ")] = row[index];
                 });
                 retrievedData.push(userInfo);
