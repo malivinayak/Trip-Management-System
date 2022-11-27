@@ -106,9 +106,9 @@ const customQuery = async (req, res) => {
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Admin Access for Custom Query Failed due to DB Error!!!\n" + err,
+                message: "🙅 Looks like you entered wrong query\n\t" + err + "\nTRY again with proper syntax\n",
                 status: "failure",
-                code: 500,
+                code: 409,
             });
         } finally {
             if (connection) {
