@@ -14,20 +14,21 @@ if (libPath && fs.existsSync(libPath)) {
 
 const customQuery = async (req, res) => {
     try {
-        console.log(req.body);
-        const { query } = req.body;
+        /**
+         * @type {{customQuery:string}}
+        */
+        let { customQuery } = req.body;
 
         let connection;
 
         try {
             // DB Connection
             connection = await oracledb.getConnection(dbConfig);
-            while (query.endsWith(" "))
-                query = query.substr(0, query.length - 1);
-            if (query.endsWith(";"))
-                query = query.substr(0, query.length - 1);
+            customQuery = customQuery.trim();
+            if (customQuery.endsWith(";"))
+                customQuery = customQuery.substring(0, customQuery.length - 1);
 
-            const result = await connection.execute(query);
+            const result = await connection.execute(customQuery);
             var retrievedData = [];
 
 
