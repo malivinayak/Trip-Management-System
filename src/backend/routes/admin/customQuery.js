@@ -34,6 +34,12 @@ const customQuery = async (req, res) => {
                     status: "restricted",
                     code: 408,
                 });
+            } if (customQuery.includes('update')) {
+                return res.send({
+                    message: "🚫 Read only access\nCan not perform any update operation",
+                    status: "restricted",
+                    code: 408,
+                });
             }
 
             const result = await connection.execute(customQuery);
