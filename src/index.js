@@ -22,6 +22,7 @@ import { deleteTripHistory } from "./backend/routes/trip/deleteTripHistory.js";
 import { tripAvailable } from "./backend/routes/trip/tripAvailable.js";
 import { tripAccept } from "./backend/routes/trip/tripAccept.js";
 import { rateableTrip } from "./backend/routes/trip/rateableTrip.js";
+import { tripRating } from "./backend/routes/trip/tripRating.js";
 
 // Admin Queries
 import { userQuery } from "./backend/routes/admin/accessUser.js";
@@ -73,7 +74,7 @@ app.post("/api/trip/history/:role", tripHistory);
 app.post("/api/trip/delete/:role", deleteTripHistory);
 app.post("/api/trip/available", tripAvailable);
 app.post("/api/trip/accept", tripAccept);
-app.post("/api/trip/rating", tripRating);
+app.post("/api/trip/rate", tripRating);
 app.post("/api/trip/rateableTrip", rateableTrip);
 
 //Wallet APIs
