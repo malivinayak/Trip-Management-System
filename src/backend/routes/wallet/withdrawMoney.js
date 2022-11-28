@@ -55,16 +55,16 @@ const withdrawMoney = async (req, res) => {
                 });
             }
             let currentBalance = getUserData.rows[0].WALLET_BALANCE;
-            if (amount >= currentBalance) {
+            if (amount > currentBalance) {
                 return res.send({
                     message: "Insufficient Balance...\nTry withdrawal with lower amount ",
                     status: "failure",
                     code: 405,
                 });
             }
-            
+
             currentBalance = currentBalance - amount;
-            const msg = `Can not withdraw ${amount} Rs currently\nYou must maintain a minimum balance of Rs 100\nTry with less amount`;
+            const msg = `Can not withdraw ₹${amount} currently\nYou must maintain a minimum balance of ₹100\nTry with less amount`;
             if (currentBalance < 100) {
                 return res.send({
                     message: msg,
