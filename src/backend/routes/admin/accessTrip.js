@@ -49,7 +49,7 @@ const tripQuery = async (req, res) => {
                         t.ISAC as AC, 
                         t.VEHICAL_TYPE as Vehicle_Type,  
                         t.TRIP_TIME.start_dateTime as Start_Time,
-                        t.TRIP_TIME.end_dateTime as End_Time,
+                        t.TRIP_TIME.end_dateTime as Accept_Time,
                         c.STATUS as Trip_Status, 
                         c.RENT as RENT,
                         c.REWARD as Reward,
