@@ -35,8 +35,15 @@ const tripAccept = async (req, res) => {
             }
 
             const driverID = getUserData.rows[0].USERNAME;
+            let acceptDateTime = new Date().toISOString();
+            acceptDateTime = acceptDateTime.substring(0, acceptDateTime.length - 5).split('T');
+            const acceptTripTime = `TIMESTAMP '${acceptDateTime[0]} ${acceptDateTime[1]}'`;
 
-            query = `update TRIP set DRIVERID = '${driverID}' where TRIPID = '${tripID}'`;
+            query = `update TRIP t
+                        set DRIVERID = '${driverID}',
+                        t.TRIP_TIME.END_DATETIME = ${acceptTripTime}
+                    where TRIPID = '${tripID}'`;
+
             result = await connection.execute(query, [], { autoCommit: true });
 
             if (result.rowsAffected == 1) {
