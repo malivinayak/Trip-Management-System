@@ -57,8 +57,9 @@ const tripBooking = async (req, res) => {
 
             const userID = getUserData.rows[0].USERNAME;
             const currentBalance = getUserData.rows[0].WALLET_BALANCE;
-            const km = (Math.random() * 45) + 5;
-            const fare = Math.round(km * (Math.floor(ac) ? 30 : 20));
+            const km = Math.round((Math.random() * 45) + 5);
+            const fare = Math.round(km * ((vehicleType === "0" ? 30 : 20) + (ac === "1" ? 10 : 0)));
+            console.log(km + ' ' + fare);
             let tripID;
             vehicleType = vehicleType == '1' ? 'Taxi' : 'Private';
 
