@@ -57,7 +57,7 @@ const deleteTripHistory = async (req, res) => {
             }
 
             result = await connection.execute(query, [], { autoCommit: true });
-            console.log(result);
+
             return res.send({
                 message: "Data deleted successfully",
                 status: "success",
