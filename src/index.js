@@ -18,6 +18,7 @@ import { sessionEnd } from "./backend/routes/session-end/sessionEnd.js";
 // Trip Function
 import { tripBooking } from "./backend/routes/trip/tripBooking.js";
 import { tripHistory } from "./backend/routes/trip/tripHistory.js";
+import { deleteTripHistory } from "./backend/routes/trip/deleteTripHistory.js";
 import { tripAvailable } from "./backend/routes/trip/tripAvailable.js";
 import { tripAccept } from "./backend/routes/trip/tripAccept.js";
 import { tripRating } from "./backend/routes/trip/tripRating.js";
@@ -69,6 +70,7 @@ app.post("/api/query/custom", customQuery);
 // trip APIs
 app.post("/api/trip/booking", tripBooking);
 app.post("/api/trip/history/:role", tripHistory);
+app.post("/api/trip/delete/:role", deleteTripHistory);
 app.post("/api/trip/available", tripAvailable);
 app.post("/api/trip/accept", tripAccept);
 app.post("/api/trip/rating", tripRating);
