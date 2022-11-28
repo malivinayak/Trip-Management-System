@@ -127,11 +127,11 @@ const tripHistory = async (req, res) => {
                 });
             }
 
-            if (result.rows[0] === undefined) {
+            if (retrievedData.length === 0) {
                 return res.send({
-                    message: "Data Retrieved ",
+                    message: "No record found ",
                     status: "success",
-                    code: 200,
+                    code: 205,
                     data: {
                         properties: [],
                         values: [],
