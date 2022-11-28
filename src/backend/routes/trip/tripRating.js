@@ -16,7 +16,7 @@ const tripRating = async (req, res) => {
 
     try {
         const { token } = req.body;
-
+        console.log(req.body);
         if (!token) {
             return res.status(400).json({
                 status: "error",
@@ -34,12 +34,16 @@ const tripRating = async (req, res) => {
                 outFormat: oracledb.OUT_FORMAT_OBJECT,
             };
 
-
+            return res.send({
+                message: "Data Retrieved ",
+                status: "success",
+                code: 200,
+            });
 
         } catch (err) {
             console.log(" Error at Data Base : " + err);
             return res.status(500).send({
-                message: "Rateable trip list retrieval Failed!!!",
+                message: "Trip rating Failed!!!",
                 status: "failure",
                 code: 500,
             });
