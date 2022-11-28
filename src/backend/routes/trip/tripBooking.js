@@ -84,12 +84,11 @@ const tripBooking = async (req, res) => {
             const insertCBS = `Insert into CBS values('a','${tripID}', 0,${fare},0,0)`;
             await connection.execute(insertCBS, [], { autoCommit: true },);
             const data = {
-                tripID,
+                tripId: tripID,
                 km,
-                ac,
-                vehicleType,
                 fare,
             };
+
             return res.send({
                 message: "Trip Booked Successful...",
                 status: "success",
