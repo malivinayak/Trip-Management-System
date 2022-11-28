@@ -1,7 +1,7 @@
 import oracledb from 'oracledb';
 import { dbConfig } from '../../dbconfig.js';
 
-const acceptingTrip = async (req, res) => {
+const tripAccept = async (req, res) => {
     // console.log(req.body);
 
 
@@ -41,4 +41,4 @@ const acceptingTrip = async (req, res) => {
     }
 }
 
-export { acceptingTrip };
+export { tripAccept };
