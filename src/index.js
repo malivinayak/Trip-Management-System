@@ -21,7 +21,7 @@ import { tripHistory } from "./backend/routes/trip/tripHistory.js";
 import { deleteTripHistory } from "./backend/routes/trip/deleteTripHistory.js";
 import { tripAvailable } from "./backend/routes/trip/tripAvailable.js";
 import { tripAccept } from "./backend/routes/trip/tripAccept.js";
-import { tripRating } from "./backend/routes/trip/tripRating.js";
+import { rateableTrip } from "./backend/routes/trip/rateableTrip.js";
 
 // Admin Queries
 import { userQuery } from "./backend/routes/admin/accessUser.js";
@@ -74,6 +74,7 @@ app.post("/api/trip/delete/:role", deleteTripHistory);
 app.post("/api/trip/available", tripAvailable);
 app.post("/api/trip/accept", tripAccept);
 app.post("/api/trip/rating", tripRating);
+app.post("/api/trip/rateableTrip", rateableTrip);
 
 //Wallet APIs
 app.post("/api/cbs/withdraw-money", withdrawMoney);
