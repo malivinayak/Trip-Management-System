@@ -17,7 +17,7 @@ const acceptTrip = async (data) => {
     const result = await response.json();
 
     if (result.code === 200) {
-      alert("Trip accepted successfully...");
+      alert(result.message);
       document.querySelector("#acceptTripForm").reset();
     } else if (result.code === 500) {
       throw new Error(result.message);
