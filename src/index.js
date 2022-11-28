@@ -75,7 +75,7 @@ app.post("/api/trip/delete/:role", deleteTripHistory);
 app.post("/api/trip/available", tripAvailable);
 app.post("/api/trip/accept", tripAccept);
 app.post("/api/trip/rate", tripRating);
-app.post("/api/trip/rateableTrip", rateableTrip);
+app.post("/api/trip/rateable", rateableTrip);
 
 //Wallet APIs
 app.post("/api/cbs/withdraw-money", withdrawMoney);
