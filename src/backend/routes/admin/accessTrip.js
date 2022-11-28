@@ -74,7 +74,7 @@ const tripQuery = async (req, res) => {
             query += place1 ? `t.PLACE.pickup_place like '%${place1}%' and ` : '';
             query += place2 ? `t.PLACE.drop_place like '%${place2}%' and ` : '';
             query += ac != '' ? `c.STATUS = ${ac} and ` : '';
-            query += status != '' ? `t.ISstatus = ${status} and ` : '';
+            query += status ? `t.ISstatus = ${status} and ` : '';
             query += fareR1 ? `c.TRIP_CHARGE >= ${Math.floor(fareR1)} and ` : '';
             query += fareR2 ? `c.TRIP_CHARGE <= ${Math.floor(fareR2)} and ` : '';
             query += startDateTime1 ? `t.TRIP_TIME.start_dateTime >= ${startTripTime1} and ` : '';
