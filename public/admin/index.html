@@ -1048,18 +1048,29 @@
                         padding-top: 18px;
                       "
                     >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>Start Time</strong>
+                        </p>
+                      </div>
                       <div class="col-md-10 col-md-offset-1">
                         <div class="row">
                           <div class="col-md-6">
-                            <p
+                            <label
                               style="
                                 margin-left: 2%;
                                 font-family: Roboto, sans-serif;
-                                font-size: 18px;
                               "
+                              for="from"
                             >
-                              <strong>Start Time</strong>
-                            </p>
+                              From
+                            </label>
                             <input
                               class="form-control"
                               type="datetime-local"
@@ -1067,19 +1078,19 @@
                                 margin-left: 0px;
                                 font-family: Roboto, sans-serif;
                               "
-                              name="dateTime1"
+                              name="startDateTime1"
                             />
                           </div>
                           <div class="col-md-6">
-                            <p
+                            <label
                               style="
                                 margin-left: 2%;
                                 font-family: Roboto, sans-serif;
-                                font-size: 18px;
                               "
+                              for="to"
                             >
-                              <strong>End Time</strong>
-                            </p>
+                              To
+                            </label>
                             <input
                               class="form-control"
                               type="datetime-local"
@@ -1087,7 +1098,71 @@
                                 margin-left: 0px;
                                 font-family: Roboto, sans-serif;
                               "
-                              name="dateTime2"
+                              name="startDateTime2"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      style="
+                        margin-right: 0px;
+                        margin-left: 0px;
+                        padding-top: 18px;
+                      "
+                    >
+                      <div class="col-md-8 col-md-offset-1">
+                        <p
+                          style="
+                            margin-left: 2%;
+                            font-family: Roboto, sans-serif;
+                            font-size: 18px;
+                          "
+                        >
+                          <strong>End Time</strong>
+                        </p>
+                      </div>
+                      <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="from"
+                            >
+                              From
+                            </label>
+                            <input
+                              class="form-control"
+                              type="datetime-local"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="endDateTime1"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              style="
+                                margin-left: 2%;
+                                font-family: Roboto, sans-serif;
+                              "
+                              for="to"
+                            >
+                              To
+                            </label>
+                            <input
+                              class="form-control"
+                              type="datetime-local"
+                              style="
+                                margin-left: 0px;
+                                font-family: Roboto, sans-serif;
+                              "
+                              name="endDateTime2"
                             />
                           </div>
                         </div>
