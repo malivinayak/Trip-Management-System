@@ -112,7 +112,7 @@ const driverRegistration = async (req, res) => {
 
             if (checkLincenceNumber.rows[0] !== undefined) {
                 return res.status(403).send({
-                    message: "",
+                    message: "LICENSE NUMBER Already registered",
                     status: "failure",
                     code: 403,
                 });
