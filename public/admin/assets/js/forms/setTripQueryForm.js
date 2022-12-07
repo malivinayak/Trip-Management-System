@@ -9,8 +9,10 @@ const setTripQueryForm = () => {
     const tripQueryInfo = {
       place1: tripQueryForm.place1.value,
       place2: tripQueryForm.place2.value,
-      dateTime1: tripQueryForm.dateTime1.value,
-      dateTime2: tripQueryForm.dateTime2.value,
+      startDateTime1: tripQueryForm.startDateTime1.value,
+      startDateTime2: tripQueryForm.startDateTime2.value,
+      endDateTime1: tripQueryForm.endDateTime1.value,
+      endDateTime2: tripQueryForm.endDateTime2.value,
       ac: tripQueryForm.ac.value,
       fareR1: tripQueryForm.fareR1.value,
       fareR2: tripQueryForm.fareR2.value,
