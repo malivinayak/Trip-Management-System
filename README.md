@@ -1,4 +1,19 @@
-# Trip Management System with Advance Database
+<h1> Trip Management System with Advance Database </h1>
+
+**Table of Contents**
+
+- [Problem Statement:](#problem-statement)
+- [Road Map](#road-map)
+- [Goals](#goals)
+- [Functions And Features](#functions-and-features)
+- [GUI](#gui)
+  - [Home Page](#home-page)
+  - [Registration](#registration)
+  - [Login](#login)
+  - [Dashboard](#dashboard)
+- [Future Scope](#future-scope)
+- [Team Member](#team-member)
+- [References](#references)
 
 ## Problem Statement: 
 To design and implement a database for the `Trip Management System`.
@@ -101,7 +116,7 @@ To design and implement a database for the `Trip Management System`.
 - Taxi Pooling
 - Payment Integration
 
-## Team
+## Team Member
 <img src="./doc/img/Team.png" alter="Trip Management Poster" align="center" width="auto" height="auto" >
 
 
