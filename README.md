@@ -13,6 +13,8 @@ To design and implement a database for the `Trip Management System`.
 - Calculating the fare for trip according to selected options.
 - Getting a rating from the client to facilitate a reward facility for employee. 
 
+## Functions And Features
+<img src="./doc/img/Functions-And-Features.gif" alter="Trip Management Poster" align="center" width="auto" height="auto" >
 
 ## Product Features
 Some of the features are identified for the software. They are listed below:
