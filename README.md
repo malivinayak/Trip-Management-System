@@ -16,12 +16,13 @@ To design and implement a database for the `Trip Management System`.
 ## Functions And Features
 <img src="./doc/img/Functions-And-Features.gif" alter="Trip Management Poster" align="center" width="auto" height="auto" >
 
-## Product Features
-Some of the features are identified for the software. They are listed below:
-- **Calculate Fare**: The client must be available to check the fare they should pay for
-the vehicles.
-- **Rating**: The administrator should be able to see the rating given by each client so
-that he can get appropriate rewards according to it.
+
+## Future Scope
+- Live Tracking of Taxi/Private Car
+- Including Private Bus
+- Taxi Pooling
+- Payment Integration
+
 
 ## References
 1. http://msdn.microsoft.com/en-us/library/ms130214
