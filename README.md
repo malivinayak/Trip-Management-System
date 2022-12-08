@@ -4,7 +4,7 @@
 To design and implement a database for the `Trip Management System`.
 
 ## Road Map
-<img src="./doc/img/POSTER.PNG" alter="Trip Management Poster" align="center" width="auto" height="auto" >
+<img src="./doc/img/Poster.PNG" alter="Trip Management Poster" align="center" width="auto" height="auto" >
 
 ## Goals
 - Manage all details of clients who registered and requested for getting the service.   
