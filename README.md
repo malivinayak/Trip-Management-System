@@ -37,7 +37,7 @@ To design and implement a database for the `Trip Management System`.
 > >   <br />
 > >   <img height="auto" src="./doc/img/UI/Registration-User.jpg" />
 > > </details>
-
+>
 > #### Driver Registration
 > > <details>	
 > >   <summary>Driver Registration UI</summary>
@@ -55,7 +55,7 @@ To design and implement a database for the `Trip Management System`.
 > >   <br />
 > >   <img height="auto" src="./doc/img/UI/Login-Admin.jpg" />
 > > </details>
-
+>
 > #### User-Driver Login
 > > <details>	
 > >   <summary>User-Driver Login UI</summary>
