@@ -36,77 +36,77 @@ To design and implement a database for the `Trip Management System`.
 ## GUI
 
 ### Home Page
+
 > <details>	
 >   <summary>Home Page UI</summary>
 > 
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Home-Page.jpg" />
 > </details>
+> <br>
 
 ### Registration
 
-> #### User Registration
-> > <details>	
-> >   <summary>User Registration UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Registration-User.jpg" />
-> > </details>
+> <details>	
+>   <summary>User Registration UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Registration-User.jpg" />
+> </details>
+> <br>
 >
-> #### Driver Registration
-> > <details>	
-> >   <summary>Driver Registration UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Registration-Driver.jpg" />
-> > </details>
-
+> <details>	
+>   <summary>Driver Registration UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Registration-Driver.jpg" />
+> </details>
+> <br>
+> 
 ### Login
 
-> #### Admin Login
-> > <details>	
-> >   <summary>Admin Login UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Login-Admin.jpg" />
-> > </details>
+> <details>	
+>   <summary>Admin Login UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Login-Admin.jpg" />
+> </details>
+> <br>
 >
-> #### User-Driver Login
-> > <details>	
-> >   <summary>User-Driver Login UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Login-User-Driver.jpg" />
-> > </details>
+> <details>	
+>   <summary>User-Driver Login UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Login-User-Driver.jpg" />
+> </details>
+> <br>
 
 
 ### Dashboard
 
-> #### Admin Dashboard
->
-> > <details>	
-> >   <summary>Admin Dashboard UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Dashboard-Admin.jpg" />
-> > </details>
->
-> #### User Dashboard
-> > <details>	
-> >   <summary>User Dashboard UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Dashboard-User.jpg" />
-> >   <br>
-> > </details>
+> <details>	
+>   <summary>Admin Dashboard UI</summary>
 > 
-> #### Driver Dashboard
-> > <details>	
-> >   <summary>Driver Dashboard UI</summary>
-> > 
-> >   <br />
-> >   <img height="auto" src="./doc/img/UI/Dashboard-Driver.jpg" />
-> > </details>
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Dashboard-Admin.jpg" />
+> </details>
+> <br>
+> <details>	
+>   <summary>User Dashboard UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Dashboard-User.jpg" />
+>   <br>
+> </details>
+> <br>
+> 
+> <details>	
+>   <summary>Driver Dashboard UI</summary>
+> 
+>   <br />
+>   <img height="auto" src="./doc/img/UI/Dashboard-Driver.jpg" />
+> </details>
+> <br>
 
 
 
