@@ -43,7 +43,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Home-Page.jpg" />
 > </details>
-> <br>
+>
 
 ### Registration
 
@@ -53,7 +53,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Registration-User.jpg" />
 > </details>
-> <br>
+>
 >
 > <details>	
 >   <summary>Driver Registration UI</summary>
@@ -61,7 +61,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Registration-Driver.jpg" />
 > </details>
-> <br>
+>
 > 
 ### Login
 
@@ -71,7 +71,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Login-Admin.jpg" />
 > </details>
-> <br>
+>
 >
 > <details>	
 >   <summary>User-Driver Login UI</summary>
@@ -79,7 +79,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Login-User-Driver.jpg" />
 > </details>
-> <br>
+>
 
 
 ### Dashboard
@@ -90,7 +90,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Dashboard-Admin.jpg" />
 > </details>
-> <br>
+>
 > <details>	
 >   <summary>User Dashboard UI</summary>
 > 
@@ -98,7 +98,7 @@ To design and implement a database for the `Trip Management System`.
 >   <img height="auto" src="./doc/img/UI/Dashboard-User.jpg" />
 >   <br>
 > </details>
-> <br>
+>
 > 
 > <details>	
 >   <summary>Driver Dashboard UI</summary>
@@ -106,7 +106,7 @@ To design and implement a database for the `Trip Management System`.
 >   <br />
 >   <img height="auto" src="./doc/img/UI/Dashboard-Driver.jpg" />
 > </details>
-> <br>
+>
 
 
 
