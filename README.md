@@ -11,6 +11,10 @@
   - [Registration](#registration)
   - [Login](#login)
   - [Dashboard](#dashboard)
+- [Advance Database Concepts](#advance-database-concepts)
+  - [Inheritance](#inheritance)
+  - [Sequence](#sequence)
+  - [Trigger](#trigger)
 - [Future Scope](#future-scope)
 - [Team Member](#team-member)
 - [References](#references)
@@ -108,7 +112,39 @@ To design and implement a database for the `Trip Management System`.
 > </details>
 >
 
+## Advance Database Concepts
 
+### Inheritance
+
+> Is-A relation between 
+> 1. Person-Admin
+> 2. Person-User
+> 3. Person-Driver
+
+### Sequence
+
+> Sequence is used to auto-increment ID's of following tables
+> 1. Trip Table
+> 2. CBS[Central Bank System] Table
+> 3. User Personal Trip History Table
+> 4. Driver Personal Trip History Table
+> 5. Rating Table
+
+### Trigger
+
+> Triggers are used implicitly run, or fired, on following table
+> 1. On **Trip Booking**
+>       - Update Trip ID as per `next.seq` appending **T** and beginning
+>       - Update CBS ID as per `next.seq` appending **CBS** and beginning
+>       - Insert trip entry in user history table
+>       - 10% of trip rent will be set as commission and reaming as trip fare
+>       - Deduct trip rent from user wallet
+> 2. On **Trip Accepting**
+>       - Insert trip entry in driver history table
+>       - Deposit trip fare to driver wallet
+>       - Update trip status as accepted
+> 3. On Successful **Rating**
+>       - 5% of trip rent will be deposited to driver wallet
 
 ## Future Scope
 - Live Tracking of Taxi/Private Car
